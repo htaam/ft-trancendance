@@ -1,0 +1,48 @@
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height:100vh;
+  margin-top:100px;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.leaderboard .time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 25em;
+}
+
+.leaderboard .time > button {
+  padding: 0.4em 2em;
+  border: 1px solid var(--color-dark);
+  border-radius: 50px;
+  background-color: transparent;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+}
+
+.leaderboard .time > button:hover {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+.leaderboard > .page-header {
+  background-color: #463366;
+  padding: 50px;
+}
+
+.leaderboard > .active {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+@media (max-width: 500px) {
+  .leaderboard > .page-header > h1 {
+    font-size: 2rem;
+  }
+}

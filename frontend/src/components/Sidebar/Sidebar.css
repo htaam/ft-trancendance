@@ -1,0 +1,67 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: #333;
+  color: #fff;
+  background-color: #463366;
+  border-right: 5px solid aquamarine;
+  padding-top:120px;
+  padding-right: 100px;
+  margin-right: 100px;;
+  margin-left: 40px;
+  height:100vh;
+  display: none;
+  --color-light: aquamarine;
+  --color-dark: #463366;
+}
+
+.sidebar > .logo {
+  width: 300px;
+  margin-top: 5vw;
+  margin-bottom: 50px;
+  margin-left: 15px;
+}
+
+.sidebar > .logo img {
+  width: 80%;
+  justify-content: center;
+}
+
+.sidebar > .menu {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.sidebar > .menu > .menu-item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  transition: border-color 0.2s;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  padding: 20px;
+  width: 100%;
+  color: white;
+  font-size: 20px;
+}
+
+.sidebar > .menu > .menu-item img {
+  width: 5.5vh;
+  margin-right: 5vh;
+}
+
+.sidebar > .menu > .menu-item:active {
+  border-color: aquamarine;
+}
+
+.sidebar > .menu > .menu-item:hover {
+  border-color: aquamarine;
+}
+
+@media (min-width: 1100px) {
+  .sidebar {
+    display: flex; /* Show the container when the screen size is larger */
+  }
+}

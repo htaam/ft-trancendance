@@ -1,0 +1,32 @@
+import Channel from 'src/entitys/channel.entity';
+declare class UserRegisterDto {
+    password: string;
+    userName: string;
+    email: string;
+    avatar: string;
+    passwordRepeat: string;
+    is2FOn: boolean;
+    secret2F: string;
+    elo: number;
+    displayName: string;
+    friends: string[];
+    blocked: string[];
+    chat: Channel[];
+    msgHist: string;
+    idWebSocket: string;
+    gameNumber: number;
+    gameWin: number;
+    gameLose: number;
+    winLoseRate: string;
+    totalPointGet: number;
+    totalPointTake: number;
+    pointGetTakeRate: string;
+    winStreak: number;
+    gameHist: string;
+    xp: number;
+    totalGame: number;
+    socketID: string;
+    slot: number;
+    isActive: boolean;
+}
+export default UserRegisterDto;

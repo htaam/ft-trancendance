@@ -1,0 +1,30 @@
+.group-names {
+  margin: 5% 0%;
+  padding: 2%;
+  border: solid 0.1em #73e9ed;
+  border-radius: 0.5em;
+  height: 90%;
+  text-align: center;
+}
+
+.group-names > .groupName {
+  margin: 5% 2%;
+  background-color: #5cbbbe;
+  padding: 2%;
+  border-radius: 0.5em;
+  color: #fbf060;
+  color: white;
+  box-shadow: 0.1em 0.1em 0.3em #1d4e4f;
+  border: solid 0.1em #5cbbbe;
+}
+
+.group-names > .groupName:hover {
+  background-color: #62b2b3;
+  color: #c4b80f;
+  cursor: pointer;
+  border: solid 0.1em #73e9ed;
+}
+
+.group-names > .selectedChannelStyle {
+  background-color: #356b6d; 
+}

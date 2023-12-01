@@ -1,0 +1,51 @@
+.login {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #463366;
+}
+
+.disk {
+  width: 50%;
+  max-width: 40vh;
+  margin-bottom: 50px;;
+}
+
+.login .logo {
+  width: 50%;
+  max-width: 40vh;
+  margin-bottom: 5px;
+}
+
+.slogan {
+  color: white;
+  font-size: 25px;
+}
+
+.login .button {
+  margin-top: 25px;
+  width: 20vw;
+  background: #5cb9bd;
+  color: white;
+  font-size: 15px;
+}
+
+.login > .disk {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+
+  .slogan {
+    font-size: 3vw;
+  }
+  .login .button {
+    width: 200px;
+    font-size: 15px;
+  }
+}

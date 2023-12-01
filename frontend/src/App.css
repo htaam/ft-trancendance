@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Mono+One");
+
+* > * {
+  font-family: "Rubik Mono One", regular;
+  --color-light: aquamarine;
+  --color-dark: #463366;
+}
+
+.page {
+  background-color: black;
+  width: 100%;
+}
+
+.testAPI {
+  margin: 3em;
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1ft;
+  position: fixed;
+}
+
+.page-header > .title {
+  margin-left: 20px;
+}
+
+.container-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

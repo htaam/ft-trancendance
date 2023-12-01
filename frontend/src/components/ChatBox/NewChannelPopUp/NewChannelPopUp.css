@@ -1,0 +1,86 @@
+.bluredBackground {
+  width: 100dvw;
+  height: 100dvh;
+  backdrop-filter: blur(5px);
+  position: absolute;
+  left: 0;
+}
+
+.bluredBackground > .newChannelPopUp {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 0em;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0.2em 0.5em 0 rgba(0, 0, 0, 0.2),
+    0 0.2em 0.5em 0 rgba(0, 0, 0, 0.2);
+  border-radius: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.bluredBackground > .newChannelPopUp > .popUpHeader {
+  display: flex;
+  flex-direction: row;
+}
+
+.bluredBackground > .newChannelPopUp > .popUpHeader > .headerTitle {
+  padding: 1em;
+}
+
+.bluredBackground > .newChannelPopUp > .popUpHeader > .title1 {
+  background-color: #fcf061;
+  border-radius: 0.5em 0 0 0;
+}
+
+.bluredBackground > .title1Selected {
+  background-color: #fcf061;
+}
+
+.bluredBackground > .newChannelPopUp > .popUpHeader > .title1TakePoint {
+  border-radius: 0.5em 0 2em 0;
+}
+
+.bluredBackground > .newChannelPopUp > .popUpHeader > .title2 {
+  background-color: #d39bc6;
+}
+
+.bluredBackground > .title2Selected {
+  background-color: #d39bc6;
+}
+
+.bluredBackground > .newChannelPopUp > .popUpHeader > .title2LeftPoint {
+  border-radius: 0 0 0 2em;
+}
+
+.bluredBackground > .newChannelPopUp > .popUpHeader > .title2RightPoint {
+  border-radius: 0 0 2em 0;
+}
+
+.bluredBackground > .newChannelPopUp > .popUpHeader > .title3 {
+  background-color: #5cbbbe;
+  border-radius: 0 0.5em 0 0;
+}
+
+.bluredBackground > .title3Selected {
+  background-color: #5cbbbe;
+}
+
+.bluredBackground > .newChannelPopUp > .popUpHeader > .title3TakePoint {
+  border-radius: 0 0.5em 0 2em;
+}
+
+.bluredBackground > .newChannelPopUp > .cancelButton {
+  text-align: center;
+  position: absolute;
+  padding: 0.2em 0em;
+  width: 100%;
+  background-color: #5cbbbe;
+  bottom: 0;
+  border-radius: 0 0 0.5em 0.5em;
+}
+
+.bluredBackground > .newChannelPopUp > .cancelButton:hover {
+  cursor: pointer;
+  background-color: #4c9a9c;
+}

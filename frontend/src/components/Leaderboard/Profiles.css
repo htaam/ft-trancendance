@@ -1,0 +1,63 @@
+#profile {
+    margin-top: 15em;
+    color: white;
+  }
+  
+  #profile .flex {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+  }
+  
+  #profile .flex .item {
+    display: flex;
+    align-items: center;
+    gap: 3em;
+  }
+  
+  #profile .flex img {
+    width: 4em;
+    border-radius: 50%;
+  }
+  
+  #profile .flex .info {
+    font-size: 1em;
+    padding: 1em;
+    color: aquamarine;
+  }
+  
+  #profile .flex .info h3 {
+    margin-bottom: 5px;
+  }
+  
+  #profile .flex .info span {
+    font-size: 0.8em;
+    margin: 0;
+  }
+  
+  #profile .score {
+    display: flex;
+    font-size: 15px;
+    margin-top: 30px;
+  }
+  
+  
+  #profile > .flex > .item > .rank {
+    font-size: 20px;
+  }
+  
+  @media (min-width: 1000px) {
+  
+    #profile .flex {
+      display: flex;
+      justify-content: space-between;
+      gap: 2em;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    #profile .flex {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
