@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChatGateway = void 0;
 const common_1 = require("@nestjs/common");
@@ -19,7 +20,7 @@ const socket_io_1 = require("socket.io");
 const chat_service_1 = require("../services/chat.service");
 const user_service_1 = require("../services/user.service");
 let backendMembers = [''];
-let ChatGateway = class ChatGateway {
+let ChatGateway = exports.ChatGateway = class ChatGateway {
     constructor(userService, chatService) {
         this.userService = userService;
         this.chatService = chatService;
@@ -132,10 +133,9 @@ let ChatGateway = class ChatGateway {
         return channel.history;
     }
 };
-exports.ChatGateway = ChatGateway;
 __decorate([
     (0, websockets_1.WebSocketServer)(),
-    __metadata("design:type", socket_io_1.Server)
+    __metadata("design:type", typeof (_a = typeof socket_io_1.Server !== "undefined" && socket_io_1.Server) === "function" ? _a : Object)
 ], ChatGateway.prototype, "server", void 0);
 __decorate([
     (0, websockets_1.SubscribeMessage)('sendMessage'),

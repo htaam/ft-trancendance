@@ -5,5 +5,5 @@ import Channel from 'src/entitys/channel.entity';
 export declare class MessageService {
     private messageRepo;
     constructor(messageRepo: Repository<Message>);
-    messageCreate(senderUser: User, msgContent: string, msgChannel: Channel): Promise<Message>;
+    messageCreate(senderUser: User, msgContent: string, msgChannel: Channel): Promise<any>;
 }

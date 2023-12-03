@@ -4,6 +4,30 @@ export interface Data<T> {
   data: T;
 }
 
+let cookies = Object.fromEntries(document.cookie.split('; ').map(c => {
+  const [ key, ...v ] = c.split('=');
+  return [ key, v.join('=') ];
+}));
+
+export const chatSocket = io(
+  `http://localhost:3000`,
+  {
+      auth: {
+          token: cookies['TwoFacAuthToken']
+      },
+      query: {
+          service : "chat"
+      }
+  }
+)
+  
+export const game_socket = io(`http://localhost:3000`, {
+  autoConnect: false,
+  auth: {
+      token: cookies['TwoFacAuthToken']
+  },
+});
+
 export class mySocket {
   private _socket: Socket;
 

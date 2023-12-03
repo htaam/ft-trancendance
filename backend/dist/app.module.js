@@ -18,9 +18,8 @@ const jwt_strategy_1 = require("./auth/jwtauth/jwt.strategy");
 const chat_module_1 = require("./modules/chat.module");
 const message_module_1 = require("./modules/message.module");
 const game_module_1 = require("./modules/game.module");
-let AppModule = class AppModule {
+let AppModule = exports.AppModule = class AppModule {
 };
-exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const config_1 = require("@nestjs/config");
@@ -18,12 +19,13 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const user_service_1 = require("./user.service");
 const bcrypt = require("bcrypt");
+const express_1 = require("express");
 const axios_1 = require("@nestjs/axios");
 const uuid_1 = require("uuid");
 const fs = require("fs");
 const process = require("process");
 const otplib_1 = require("otplib");
-let AuthService = class AuthService {
+let AuthService = exports.AuthService = class AuthService {
     constructor(usersService, jwtService, configService, httpService) {
         this.usersService = usersService;
         this.jwtService = jwtService;
@@ -143,18 +145,14 @@ let AuthService = class AuthService {
         };
     }
 };
-exports.AuthService = AuthService;
 __decorate([
     __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:paramtypes", [typeof (_d = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _d : Object, String]),
     __metadata("design:returntype", Promise)
 ], AuthService.prototype, "redirectUserAuth", null);
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [user_service_1.UserService,
-        jwt_1.JwtService,
-        config_1.ConfigService,
-        axios_1.HttpService])
+    __metadata("design:paramtypes", [user_service_1.UserService, typeof (_a = typeof jwt_1.JwtService !== "undefined" && jwt_1.JwtService) === "function" ? _a : Object, typeof (_b = typeof config_1.ConfigService !== "undefined" && config_1.ConfigService) === "function" ? _b : Object, typeof (_c = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _c : Object])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

@@ -1,7 +1,6 @@
 import { ConfigService } from "@nestjs/config";
-import { Strategy } from "passport-jwt";
 import TokenPayload from "../../interfaces/token-payload.i";
-declare const JwtStrategy_base: new (...args: any[]) => Strategy;
+declare const JwtStrategy_base: any;
 declare class JwtStrategy extends JwtStrategy_base {
     private configService;
     constructor(configService: ConfigService);

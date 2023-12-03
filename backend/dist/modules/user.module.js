@@ -17,9 +17,8 @@ const config_1 = require("@nestjs/config");
 const jwt_1 = require("@nestjs/jwt");
 const jwt_strategy_1 = require("../auth/jwtauth/jwt.strategy");
 const chat_module_1 = require("./chat.module");
-let UserModule = class UserModule {
+let UserModule = exports.UserModule = class UserModule {
 };
-exports.UserModule = UserModule;
 exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
         imports: [

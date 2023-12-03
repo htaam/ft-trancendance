@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameService = void 0;
 const common_1 = require("@nestjs/common");
@@ -18,7 +19,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const game_entity_1 = require("../entitys/game.entity");
 const typeorm_2 = require("typeorm");
 (0, common_1.Injectable)();
-let GameService = class GameService {
+let GameService = exports.GameService = class GameService {
     constructor(gameRepo) {
         this.gameRepo = gameRepo;
     }
@@ -30,9 +31,8 @@ let GameService = class GameService {
         throw new common_1.HttpException('Game Id provided is invalid!', common_1.HttpStatus.NOT_FOUND);
     }
 };
-exports.GameService = GameService;
 exports.GameService = GameService = __decorate([
     __param(0, (0, typeorm_1.InjectRepository)(game_entity_1.default)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
 ], GameService);
 //# sourceMappingURL=game.service.js.map

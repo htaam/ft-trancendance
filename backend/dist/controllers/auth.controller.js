@@ -11,17 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const auth_service_1 = require("../services/auth.service");
 const common_1 = require("@nestjs/common");
 const local_auth_guard_1 = require("../auth/local-auth.guard");
+const express_1 = require("express");
 const jwt_auth_guard_1 = require("../auth/jwtauth/jwt-auth.guard");
 const user_register_dto_1 = require("../dtos/user-register.dto");
 const _42auth_service_1 = require("../auth/42auth/42auth.service");
 const user_service_1 = require("../services/user.service");
 const bcrypt = require("bcrypt");
-let AuthController = class AuthController {
+const express_2 = require("express");
+let AuthController = exports.AuthController = class AuthController {
     constructor(authService, auth42Service, userService) {
         this.authService = authService;
         this.auth42Service = auth42Service;
@@ -155,7 +158,6 @@ let AuthController = class AuthController {
         return response.send(true);
     }
 };
-exports.AuthController = AuthController;
 __decorate([
     (0, common_1.Post)('register'),
     __param(0, (0, common_1.Body)()),
@@ -170,7 +172,7 @@ __decorate([
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, typeof (_a = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _a : Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 __decorate([
@@ -180,7 +182,7 @@ __decorate([
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, typeof (_b = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _b : Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "logOut", null);
 __decorate([
@@ -190,7 +192,7 @@ __decorate([
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, typeof (_c = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _c : Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "logcheck", null);
 __decorate([
@@ -198,7 +200,7 @@ __decorate([
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [typeof (_d = typeof express_2.Request !== "undefined" && express_2.Request) === "function" ? _d : Object, typeof (_e = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _e : Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "handleToken", null);
 __decorate([
@@ -236,7 +238,7 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:paramtypes", [typeof (_f = typeof express_2.Request !== "undefined" && express_2.Request) === "function" ? _f : Object, typeof (_g = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _g : Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "handle2faToken", null);
 __decorate([
@@ -245,7 +247,7 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:paramtypes", [typeof (_h = typeof express_2.Request !== "undefined" && express_2.Request) === "function" ? _h : Object, typeof (_j = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _j : Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "user2fa", null);
 __decorate([

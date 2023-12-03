@@ -11,9 +11,8 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const game_entity_1 = require("../entitys/game.entity");
 const game_service_1 = require("../services/game.service");
-let GameModule = class GameModule {
+let GameModule = exports.GameModule = class GameModule {
 };
-exports.GameModule = GameModule;
 exports.GameModule = GameModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([game_entity_1.default])],

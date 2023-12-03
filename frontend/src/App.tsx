@@ -8,18 +8,53 @@ import Profile from "./pages/Profile/Profile";
 import LeaderBoard from "./pages/Leaderboard/Leaderboard";
 import RetLogin from "./pages/Auth/retLogin";
 import TwoAuth from "./pages/Auth/TwoAuth.tsx";
-
-
 import Registration from "./components/Registration/Registration";
-import { mySocket } from "./dataVars/socket";
-import { RecoilRoot } from "recoil";
-
+import { chatSocket, game_socket, mySocket } from "./dataVars/socket";
+import { RecoilRoot, useRecoilState } from "recoil";
+import { twoFAEnabled, userInformation, inviterUser, userStatus } from "./dataVars/atoms.tsx";
+import { useEffect } from "react";
+import { getUserInfo } from "./pages/auth.api.ts";
 export const socket = new mySocket();
-
 export default function App() {
+  const [userstatus, setStatus] = useRecoilState(userStatus);
+  const [tfaEnabled, settwofaEnabled] = useRecoilState(twoFAEnabled);
+  const [userData, setprofileData] = useRecoilState(userInformation);
+  const [inviter, setInviter] = useRecoilState(inviterUser);
+
+
+  useEffect(() => {
+
+    // chatSocket
+    retrieveToken();
+
+    // retrieveProfile();
+  }, [userstatus]);
+
+  useEffect(() => {
+    chatSocket.on("muteNotification", (data) => {
+      /*muted_user_alert("You're  muted till " + data.duration)*/
+    });
+    return () => { chatSocket.off("muteNotification") };
+
+  }, [chatSocket])
+
+  const retrieveToken = () => {
+
+    getUserInfo()
+      .then((response: any) => {
+        setprofileData({ ...userData, ...response.data })
+        setStatus(false);
+        chatSocket;
+        game_socket;
+      })
+      .catch((e: Error) => {
+        console.log(`error === > ${e}`);
+        setStatus(true);
+      });
+  };
+
   return (
     <div className="App" id="main">
-      <RecoilRoot>
         <Router>
           <Routes>
             <Route path="/" element={<Login />} />
@@ -33,7 +68,6 @@ export default function App() {
             <Route path="/TwoAuth" element={<TwoAuth />} />
           </Routes>
         </Router>
-      </RecoilRoot>
     </div>
   );
 }

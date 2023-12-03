@@ -9,14 +9,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SocketClient = void 0;
 const common_1 = require("@nestjs/common");
 const ws_1 = require("ws");
-let SocketClient = class SocketClient {
+let SocketClient = exports.SocketClient = class SocketClient {
     constructor() {
         this.ws = new ws_1.default('ws://localhost:4042', {
             perMessageDeflate: false
         });
     }
 };
-exports.SocketClient = SocketClient;
 exports.SocketClient = SocketClient = __decorate([
     (0, common_1.Injectable)()
 ], SocketClient);

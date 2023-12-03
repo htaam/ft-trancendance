@@ -11,12 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const jwt_auth_guard_1 = require("../auth/jwtauth/jwt-auth.guard");
 const user_service_1 = require("../services/user.service");
 const common_1 = require("@nestjs/common");
 const user_changedisplay_dto_1 = require("../dtos/user-changedisplay.dto");
+const express_1 = require("express");
 const class_validator_1 = require("class-validator");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
@@ -25,7 +27,7 @@ const path = require("path");
 const process = require("process");
 const fs = require("fs");
 const user_changedisplay_dto_2 = require("../dtos/user-changedisplay.dto");
-let UserController = class UserController {
+let UserController = exports.UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
@@ -116,7 +118,6 @@ let UserController = class UserController {
         return user.idWebSocket;
     }
 };
-exports.UserController = UserController;
 __decorate([
     (0, common_1.HttpCode)(200),
     (0, common_1.UseGuards)(jwt_auth_guard_1.default),
@@ -124,7 +125,7 @@ __decorate([
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, typeof (_a = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _a : Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getuserinformation", null);
 __decorate([

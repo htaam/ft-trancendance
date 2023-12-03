@@ -9,9 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Auth42Module = void 0;
 const common_1 = require("@nestjs/common");
 const _42auth_service_1 = require("./42auth.service");
-let Auth42Module = class Auth42Module {
+let Auth42Module = exports.Auth42Module = class Auth42Module {
 };
-exports.Auth42Module = Auth42Module;
 exports.Auth42Module = Auth42Module = __decorate([
     (0, common_1.Module)({
         providers: [_42auth_service_1.Auth42Service],

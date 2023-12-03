@@ -18,9 +18,8 @@ const passport_1 = require("@nestjs/passport");
 const jwt_strategy_1 = require("../auth/jwtauth/jwt.strategy");
 const _42auth_module_1 = require("../auth/42auth/42auth.module");
 const axios_1 = require("@nestjs/axios");
-let AuthModule = class AuthModule {
+let AuthModule = exports.AuthModule = class AuthModule {
 };
-exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [user_module_1.UserModule, axios_1.HttpModule, _42auth_module_1.Auth42Module, passport_1.PassportModule, config_1.ConfigModule, jwt_1.JwtModule.registerAsync({

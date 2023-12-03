@@ -14,7 +14,7 @@ const passport_jwt_1 = require("passport-jwt");
 const passport_1 = require("@nestjs/passport");
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("../../services/user.service");
-let Jwt2faStrategy = class Jwt2faStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'jwt-2fa') {
+let Jwt2faStrategy = exports.Jwt2faStrategy = class Jwt2faStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, 'jwt-2fa') {
     constructor(userService) {
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -32,7 +32,6 @@ let Jwt2faStrategy = class Jwt2faStrategy extends (0, passport_1.PassportStrateg
         }
     }
 };
-exports.Jwt2faStrategy = Jwt2faStrategy;
 exports.Jwt2faStrategy = Jwt2faStrategy = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [user_service_1.UserService])

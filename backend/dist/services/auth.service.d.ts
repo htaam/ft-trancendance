@@ -11,21 +11,21 @@ export declare class AuthService {
     private readonly configService;
     private readonly httpService;
     constructor(usersService: UserService, jwtService: JwtService, configService: ConfigService, httpService: HttpService);
-    register(registerData: UserRegisterDto): Promise<User>;
-    getAutenticatedUser(userName: string, decryptedPassword: string): Promise<User>;
+    register(registerData: UserRegisterDto): Promise<any>;
+    getAutenticatedUser(userName: string, decryptedPassword: string): Promise<any>;
     private verifyPassword;
-    getJwtToken(user: User): string;
+    getJwtToken(user: User): any;
     getCookieWithJwtToken(user: User): string;
     getCookieForLogout(): string;
     redirectUserAuth(response: Response, hash: string): Promise<void>;
     downloadImage(url: string): Promise<string>;
     generateTwoFactorAuthenticationSecret(user: User): Promise<{
-        secret: string;
-        otpauthUrl: string;
+        secret: any;
+        otpauthUrl: any;
     }>;
-    isTwoFactorAuthenticationCodeValid(twoFactorAuthenticationCode: string, user: User): boolean;
+    isTwoFactorAuthenticationCodeValid(twoFactorAuthenticationCode: string, user: User): any;
     loginWith2fa(userWithoutPsw: Partial<User>): Promise<{
         email: string;
-        access_token: string;
+        access_token: any;
     }>;
 }

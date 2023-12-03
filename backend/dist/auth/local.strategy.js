@@ -14,7 +14,7 @@ const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const passport_local_1 = require("passport-local");
 const auth_service_1 = require("../services/auth.service");
-let LocalStrategy = class LocalStrategy extends (0, passport_1.PassportStrategy)(passport_local_1.Strategy) {
+let LocalStrategy = exports.LocalStrategy = class LocalStrategy extends (0, passport_1.PassportStrategy)(passport_local_1.Strategy) {
     constructor(authService) {
         super({
             userNameField: 'userName',
@@ -25,7 +25,6 @@ let LocalStrategy = class LocalStrategy extends (0, passport_1.PassportStrategy)
         return await this.authService.getAutenticatedUser(userName, password);
     }
 };
-exports.LocalStrategy = LocalStrategy;
 exports.LocalStrategy = LocalStrategy = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

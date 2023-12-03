@@ -11,9 +11,8 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const message_entity_1 = require("../entitys/message.entity");
 const message_service_1 = require("../services/message.service");
-let MessageModule = class MessageModule {
+let MessageModule = exports.MessageModule = class MessageModule {
 };
-exports.MessageModule = MessageModule;
 exports.MessageModule = MessageModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([message_entity_1.default])],

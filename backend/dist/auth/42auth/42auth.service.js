@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Auth42Service = void 0;
 const common_1 = require("@nestjs/common");
-let Auth42Service = class Auth42Service {
+let Auth42Service = exports.Auth42Service = class Auth42Service {
     async accessToken(req) {
         try {
             const response = await fetch('https://api.intra.42.fr/oauth/token', {
@@ -41,7 +41,6 @@ let Auth42Service = class Auth42Service {
         return null;
     }
 };
-exports.Auth42Service = Auth42Service;
 exports.Auth42Service = Auth42Service = __decorate([
     (0, common_1.Injectable)()
 ], Auth42Service);

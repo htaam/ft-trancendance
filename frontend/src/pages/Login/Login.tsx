@@ -1,30 +1,16 @@
+'use client'
 import Button from "@mui/material/Button";
 import DiskImage from "../../images/disk.png";
 import LogoImage from "../../images/PONG-logo.png";
 import "./Login.css";
+import { userInformation, twoFAEnabled } from "../../dataVars/atoms";
+import { useRecoilState } from 'recoil';
 
 function Login() {
-  const login = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // You may need to include credentials: "include" if using cookies
-      });
+  const [userData, setprofileData] = useRecoilState(userInformation);
+  const [tfaEnabled, settwofaEnabled] = useRecoilState(twoFAEnabled);
 
-      if (response.ok) {
-        // Redirect the user to the provided URL for authentication
-        const { url } = await response.json();
-        window.location.href = url;
-      } else {
-        console.error("Failed to initiate login");
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
+  const link = `http://localhost:3000/auth`
 
   return (
     <div className="login">
@@ -33,7 +19,8 @@ function Login() {
       <p className="slogan">Play Old Nice Games</p>
       <Button
         className="button"
-        onClick={login}
+        onClick={() => {
+						window.open(`${process.env.AUTH42_LINK}`, '_self')}}
         type="button"
         variant="contained"
         color="primary"

@@ -14,9 +14,8 @@ const chat_service_1 = require("../services/chat.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const channel_entity_1 = require("../entitys/channel.entity");
 const message_module_1 = require("./message.module");
-let ChatModule = class ChatModule {
+let ChatModule = exports.ChatModule = class ChatModule {
 };
-exports.ChatModule = ChatModule;
 exports.ChatModule = ChatModule = __decorate([
     (0, common_1.Module)({
         imports: [

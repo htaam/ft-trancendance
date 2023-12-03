@@ -8,21 +8,21 @@ export declare class UserService {
     private chatService;
     constructor(userRepo: Repository<User>, chatService: ChatService);
     findById(id: string): Promise<User>;
-    findByUsername(userName: string): Promise<User>;
-    create(userData: UserRegisterDto): Promise<User>;
+    findByUsername(userName: string): Promise<any>;
+    create(userData: UserRegisterDto): Promise<any>;
     updateDisplayName(id: string, registerData: ChangeDisplayNameDto): Promise<void>;
     updateImage(id: string, path: string): Promise<User>;
     getImageId(id: string): Promise<string>;
-    GetAllUsersFromDB(): Promise<User[]>;
+    GetAllUsersFromDB(): Promise<any>;
     FindUserOnDB(hash: string): Promise<string>;
     getUserPublicData(userID: string): Promise<any>;
     setTwoFactorAuthenticationSecret(secret: string, userId: string): Promise<User>;
     turnOnTwoFactorAuthentication(userId: string): Promise<User>;
     turnOffTwoFactorAuthentication(userId: string): Promise<User>;
-    generateQrCodeDataURL(otpAuthUrl: string): Promise<string>;
+    generateQrCodeDataURL(otpAuthUrl: string): Promise<any>;
     updateWebSocketId(userId: string, socketId: string): Promise<void>;
     findByDisplayname(displayName: string): Promise<string>;
-    addChannelToUser(userName: string, channelDisplayName: string): Promise<User>;
+    addChannelToUser(userName: string, channelDisplayName: string): Promise<any>;
     addUserToFriendsList(currentUser: string, friendUserName: string): Promise<void>;
     removeUserToFriendsList(currentUser: string, friendUserName: string): Promise<void>;
 }

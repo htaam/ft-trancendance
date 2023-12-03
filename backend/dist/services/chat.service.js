@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChatService = void 0;
 const common_1 = require("@nestjs/common");
@@ -19,7 +20,7 @@ const channel_entity_1 = require("../entitys/channel.entity");
 const typeorm_2 = require("typeorm");
 const user_service_1 = require("./user.service");
 const message_service_1 = require("./message.service");
-let ChatService = class ChatService {
+let ChatService = exports.ChatService = class ChatService {
     constructor(chatRepo, userService, messageService) {
         this.chatRepo = chatRepo;
         this.userService = userService;
@@ -108,14 +109,12 @@ let ChatService = class ChatService {
         return message;
     }
 };
-exports.ChatService = ChatService;
 exports.ChatService = ChatService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(channel_entity_1.default)),
     __param(1, (0, common_1.Inject)((0, common_1.forwardRef)(() => user_service_1.UserService))),
     __param(2, (0, common_1.Inject)((0, common_1.forwardRef)(() => message_service_1.MessageService))),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        user_service_1.UserService,
+    __metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, user_service_1.UserService,
         message_service_1.MessageService])
 ], ChatService);
 //# sourceMappingURL=chat.service.js.map
