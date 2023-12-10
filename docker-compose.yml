@@ -10,9 +10,9 @@ services:
     env_file:
       - .env
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./postgres:/var/lib/postgresql/data
     networks:
-      - db_network
+      - backbone
     restart: always
   
   pgadmin:
@@ -25,10 +25,48 @@ services:
     depends_on:
       - postgres
     networks:
-      - db_network
+      - backbone
+    restart: always
 
-volumes:
-  postgres_data:
+  frontend:
+    volumes:
+      - ./frontend:/app
+    build: 
+      context: ./frontend
+      dockerfile: ./frontend.dockerfile
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    restart: unless-stopped
+    depends_on:
+      - backend
+    networks:
+      - backbone
+
+
+  backend:
+    volumes:
+      - ./backend:/app
+    build: 
+      context: ./backend
+      dockerfile: ./backend.dockerfile
+    container_name: backend
+    ports:
+      - "4000:4000"
+      - "4242:4242"
+    env_file:
+      - .env
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    networks:
+      - backbone
+
 
 networks:
-  db_network:
+  backbone:
+    driver: bridge
+
