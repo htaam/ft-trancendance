@@ -18,6 +18,7 @@ const jwt_strategy_1 = require("./auth/jwtauth/jwt.strategy");
 const chat_module_1 = require("./modules/chat.module");
 const message_module_1 = require("./modules/message.module");
 const game_module_1 = require("./modules/game.module");
+const cats_controller_1 = require("./Cats/cats/cats.controller");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -32,7 +33,7 @@ exports.AppModule = AppModule = __decorate([
             message_module_1.MessageModule,
             game_module_1.GameModule,
         ],
-        controllers: [app_controller_1.AppController],
+        controllers: [app_controller_1.AppController, cats_controller_1.CatsController],
         providers: [app_service_1.AppService, jwt_strategy_1.default],
     })
 ], AppModule);
