@@ -14,28 +14,35 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CatsController = void 0;
 const common_1 = require("@nestjs/common");
+const cats_service_1 = require("./cats.service");
+const create_cat_dto_1 = require("./dto/create-cat.dto");
+const update_cat_dto_1 = require("./dto/update-cat.dto");
 let CatsController = class CatsController {
-    findAll() {
-        return 'This action returns all cats';
+    constructor(catsService) {
+        this.catsService = catsService;
+    }
+    findAll(paginationQuery) {
+        return this.catsService.findAll();
     }
     findOne(id) {
-        return `This action returns #${id} cat`;
+        return this.catsService.findOne(id);
     }
-    create(body) {
-        return body;
+    create(createCatDto) {
+        return this.catsService.create(createCatDto);
     }
-    update(id, body) {
-        return `This action updates #${id} cat`;
+    update(id, updateCatDto) {
+        return this.catsService.update(id, updateCatDto);
     }
     remove(id) {
-        return `This action removes #${id} cat`;
+        return this.catsService.remove(id);
     }
 };
 exports.CatsController = CatsController;
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], CatsController.prototype, "findAll", null);
 __decorate([
@@ -47,9 +54,9 @@ __decorate([
 ], CatsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)('name')),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [create_cat_dto_1.CreateCatDto]),
     __metadata("design:returntype", void 0)
 ], CatsController.prototype, "create", null);
 __decorate([
@@ -57,7 +64,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", [String, update_cat_dto_1.UpdateCatDto]),
     __metadata("design:returntype", void 0)
 ], CatsController.prototype, "update", null);
 __decorate([
@@ -68,6 +75,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CatsController.prototype, "remove", null);
 exports.CatsController = CatsController = __decorate([
-    (0, common_1.Controller)('cats')
+    (0, common_1.Controller)('cats'),
+    __metadata("design:paramtypes", [cats_service_1.CatsService])
 ], CatsController);
 //# sourceMappingURL=cats.controller.js.map

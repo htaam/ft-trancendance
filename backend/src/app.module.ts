@@ -10,8 +10,7 @@ import JwtStrategy from './auth/jwtauth/jwt.strategy';
 import { ChatModule } from './modules/chat.module';
 import { MessageModule } from './modules/message.module';
 import { GameModule } from './modules/game.module';
-import { CatsController } from './Cats/cats.controller';
-import { CatsService } from './Cats/cats.service';
+import { CatsModule } from './cats/cats.module';
 
 @Module({
   imports: [
@@ -22,8 +21,9 @@ import { CatsService } from './Cats/cats.service';
     ChatModule,
     MessageModule,
     GameModule,
+    CatsModule,
   ],
-  controllers: [AppController, CatsController],
-  providers: [AppService, JwtStrategy, CatsService],
+  controllers: [AppController],
+  providers: [AppService, JwtStrategy],
 })
 export class AppModule {}
