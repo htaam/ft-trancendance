@@ -11,17 +11,25 @@ import { ChatModule } from './modules/chat.module';
 import { MessageModule } from './modules/message.module';
 import { GameModule } from './modules/game.module';
 import { CatsModule } from './cats/cats.module';
+import { ServeStaticModule } from '@nestjs/serve-static'
+import { join } from 'path';
+import { TalkGateway } from './talk/talk.gateway';
+import { TalkModule } from './talk/talk.module';
 
 @Module({
   imports: [
     DatabaseModule,
     ConfigModule.forRoot(),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..',',,', 'dist', 'client'),
+    }),
     UserModule,
     AuthModule,
     ChatModule,
     MessageModule,
     GameModule,
     CatsModule,
+    TalkModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

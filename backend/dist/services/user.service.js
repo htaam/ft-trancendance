@@ -25,6 +25,9 @@ let UserService = class UserService {
         this.userRepo = userRepo;
         this.chatService = chatService;
     }
+    findAll() {
+        return this.userRepo.find();
+    }
     async findById(id) {
         const user = await this.userRepo.findOneBy({ id });
         if (user) {

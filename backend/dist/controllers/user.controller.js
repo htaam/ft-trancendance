@@ -29,6 +29,9 @@ let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
     }
+    findAll(paginationQuery) {
+        return this.userService.findAll();
+    }
     async getuserinformation(request, response) {
         const userData = await this.userService.findById(request.user.id);
         return response.send(userData);
@@ -117,6 +120,13 @@ let UserController = class UserController {
     }
 };
 exports.UserController = UserController;
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "findAll", null);
 __decorate([
     (0, common_1.HttpCode)(200),
     (0, common_1.UseGuards)(jwt_auth_guard_1.default),

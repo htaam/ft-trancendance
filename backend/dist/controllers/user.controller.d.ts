@@ -6,6 +6,7 @@ import { socketId } from 'src/dtos/user-changedisplay.dto';
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
+    findAll(paginationQuery: any): Promise<import("../entitys/user.entity").default[]>;
     getuserinformation(request: RequestWithUser, response: Response): Promise<Response<any, Record<string, any>>>;
     changeDisplayName(request: RequestWithUser, newData: ChangeDisplayName): Promise<{}>;
     uploadFile(request: RequestWithUser, file: any): Promise<import("../entitys/user.entity").default>;

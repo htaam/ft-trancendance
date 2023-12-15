@@ -23,7 +23,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateCatDto.prototype, "eyes", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsString)({ each: true }),
     __metadata("design:type", Array)
 ], CreateCatDto.prototype, "color", void 0);
 //# sourceMappingURL=create-cat.dto.js.map

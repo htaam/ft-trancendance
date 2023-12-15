@@ -25,6 +25,11 @@ export class UserService {
     private chatService: ChatService,
   ) {}
 
+  // for testing (no protection get all users)
+  findAll() {
+    return this.userRepo.find();
+  }
+
   async findById(id: string) {
     const user: User = await this.userRepo.findOneBy({ id });
     if (user) {

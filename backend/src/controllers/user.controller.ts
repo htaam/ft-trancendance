@@ -8,6 +8,7 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  Query,
   Req,
   Res,
   UploadedFile,
@@ -34,6 +35,12 @@ import { socketId } from 'src/dtos/user-changedisplay.dto';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  // for testing (no protection get all users)
+	@Get()
+	findAll(@Query() paginationQuery) {
+		return this.userService.findAll();
+	}
 
   // Get user information.
   @HttpCode(200)

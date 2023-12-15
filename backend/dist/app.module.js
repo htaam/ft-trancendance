@@ -19,6 +19,9 @@ const chat_module_1 = require("./modules/chat.module");
 const message_module_1 = require("./modules/message.module");
 const game_module_1 = require("./modules/game.module");
 const cats_module_1 = require("./cats/cats.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
+const talk_module_1 = require("./talk/talk.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -27,12 +30,16 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             database_module_1.DatabaseModule,
             config_1.ConfigModule.forRoot(),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', '..', ',,', 'dist', 'client'),
+            }),
             user_module_1.UserModule,
             auth_module_1.AuthModule,
             chat_module_1.ChatModule,
             message_module_1.MessageModule,
             game_module_1.GameModule,
             cats_module_1.CatsModule,
+            talk_module_1.TalkModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, jwt_strategy_1.default],

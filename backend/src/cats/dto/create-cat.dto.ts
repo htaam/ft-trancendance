@@ -7,6 +7,6 @@ export class CreateCatDto {
     @IsString()
     readonly eyes: string;
 
-    @IsString()
+    @IsString({each: true})
     readonly color: string[];
 }

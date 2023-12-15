@@ -6,20 +6,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CatsModule = void 0;
+exports.TalkModule = void 0;
 const common_1 = require("@nestjs/common");
-const cats_controller_1 = require("./cats.controller");
-const cats_service_1 = require("./cats.service");
-const typeorm_1 = require("@nestjs/typeorm");
-const cats_entity_1 = require("./entities/cats.entity");
-let CatsModule = class CatsModule {
+const talk_gateway_1 = require("./talk.gateway");
+let TalkModule = class TalkModule {
 };
-exports.CatsModule = CatsModule;
-exports.CatsModule = CatsModule = __decorate([
+exports.TalkModule = TalkModule;
+exports.TalkModule = TalkModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([cats_entity_1.Cat])],
-        controllers: [cats_controller_1.CatsController],
-        providers: [cats_service_1.CatsService],
+        providers: [talk_gateway_1.TalkGateway],
     })
-], CatsModule);
-//# sourceMappingURL=cats.module.js.map
+], TalkModule);
+//# sourceMappingURL=talk.module.js.map

@@ -7,6 +7,7 @@ export declare class UserService {
     private userRepo;
     private chatService;
     constructor(userRepo: Repository<User>, chatService: ChatService);
+    findAll(): Promise<User[]>;
     findById(id: string): Promise<User>;
     findByUsername(userName: string): Promise<User>;
     create(userData: UserRegisterDto): Promise<User>;

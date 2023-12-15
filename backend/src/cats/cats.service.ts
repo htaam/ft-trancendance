@@ -1,54 +1,47 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Cat } from './entities/cats.entity';
+import { CreateCatDto } from './dto/create-cat.dto';
+import { UpdateCatDto } from './dto/update-cat.dto';
 
 @Injectable()
 export class CatsService {
-    // Pretend is our data source
-    private cats: Cat[] = [
-        {
-            id: 1,
-            name: 'Shiva',
-            eyes: 'blue',
-            color: ['white', 'gray', 'brown', 'black'],
-        },
-        {
-            id: 2,
-            name: 'Mizuki',
-            eyes: 'green',
-            color: ['black', 'dark brown', 'white'],
-        },
-        {
-            id: 3,
-            name: 'Menina',
-            eyes: 'brown',
-            color: ['black', 'brown', 'orange'],
-        },
-    ];
+    constructor(
+        @InjectRepository(Cat)
+        private readonly catRepository: Repository<Cat>,
+    ) {}
 
     findAll() {
-        return this.cats;
+        return this.catRepository.find();
     }
 
-    findOne(id: string) {
-        return this.cats.find(item => item.id === +id);
-    }
-
-    create(createCatsDto: any) {
-        this.cats.push(createCatsDto);
-    }
-
-    update(id: string, updateCatsDto: any) {
-        const existingCats = this.findOne(id);
-        if (existingCats) {
-            // update existing entity
+    async findOne(id: string) {
+        const cat = await this.catRepository.findOne({where: {id: Number(id)}}); // convertion for comparition
+        if(!cat) {
+            throw new NotFoundException(`Cat #${id} not found`);
         }
+        return cat;
     }
 
-    remove(id: string) {
-        const catsIndex = this.cats.findIndex(item => item.id === +id);
-        if (catsIndex >= 0) {
-            this.cats.splice(catsIndex, 1);
+    create(createCatDto: CreateCatDto) {
+        const cat = this.catRepository.create(createCatDto);
+        return this.catRepository.save(cat);
+    }
+
+    async update(id: string, updateCatDto: UpdateCatDto) {
+        const cat = await this.catRepository.preload({
+            id: +id,
+            ...updateCatDto,
+        });
+        if (!cat) {
+            throw new NotFoundException(`Cat #${id} not found`);
         }
+        return this.catRepository.save(cat);
     }
 
+    async remove(id: string) {
+        const cat = await this.findOne(id);
+        return this.catRepository.remove(cat);
+    }
 }
