@@ -13,6 +13,7 @@ import TwoAuth from "./pages/Auth/TwoAuth.tsx";
 import Registration from "./components/Registration/Registration";
 import { mySocket } from "./dataVars/socket";
 import { RecoilRoot } from "recoil";
+import Talk from "./pages/Talk/Talk";
 
 export const socket = new mySocket();
 
@@ -31,6 +32,7 @@ export default function App() {
             <Route path="/Reg" element={<Registration />} />
             <Route path="/RetLogin" element={<RetLogin />} />
             <Route path="/TwoAuth" element={<TwoAuth />} />
+            <Route path="/Talk" element={<Talk />} />
           </Routes>
         </Router>
       </RecoilRoot>

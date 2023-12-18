@@ -1,14 +1,13 @@
 import HomeDisplay from "../../components/HomeDisplay/HomeDisplay";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
-const Home: React.FC = () => {
+export const Home = () => {
+  
   return (
-    <>
-      <div className="container-row">
-        <Sidebar />
-        <HomeDisplay />
-      </div>
-    </>
+    <div className="container-row">
+      <Sidebar />
+      <HomeDisplay />
+    </div>
   );
 };
 

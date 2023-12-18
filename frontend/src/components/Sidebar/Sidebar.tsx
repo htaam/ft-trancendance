@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Sidebar.css";
@@ -9,7 +9,7 @@ import * as Chat from "../../images/chat-icon.png";
 import * as Profile from "../../images/perfil-icon.png";
 import * as Exit from "../../images/exit-icon.png";
 
-const Sidebar: React.FC = () => {
+export const Sidebar = () => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
   const changeTab = (tab: string) => {
     console.log(tab);
@@ -46,7 +46,7 @@ const Sidebar: React.FC = () => {
 
         <Link
           className={`menu-item ${activeTab === "tab3" ? "active" : ""}`}
-          to="/Chat"
+          to="/Talk"
           onClick={() => changeTab("tab3")}
         >
           <img className="ichat" src={Chat.default} alt="Chat icon" />

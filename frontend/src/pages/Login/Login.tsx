@@ -1,47 +1,51 @@
-import Button from "@mui/material/Button";
-import DiskImage from "../../images/disk.png";
-import LogoImage from "../../images/PONG-logo.png";
-import "./Login.css";
+import { useEffect, useState } from "react";
+import { User } from '../../../../shared/interfaces/talk.interface';
 
-function Login() {
-  const login = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // You may need to include credentials: "include" if using cookies
-      });
+import { LoginForm } from "../../components/_Login/login";
+import { LoginLayout } from "../Talk/Layout/LoginLayout";
+import Home from "../Home/Home";
 
-      if (response.ok) {
-        // Redirect the user to the provided URL for authentication
-        const { url } = await response.json();
-        window.location.href = url;
-      } else {
-        console.error("Failed to initiate login");
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-    }
-  };
+export const Login = () => {
 
-  return (
-    <div className="login">
-      <img className="disk" src={DiskImage} alt="Diskette Illustration" />
-      <img className="logo" src={LogoImage} alt="Logo Pong" />
-      <p className="slogan">Play Old Nice Games</p>
-      <Button
-        className="button"
-        onClick={login}
-        type="button"
-        variant="contained"
-        color="primary"
-      >
-        Login with 42 Intra
-      </Button>
-    </div>
-  );
+	// Store the current user of the client
+	const [user, setUser] = useState<User>();
+
+	/* SessionStorage is a browser API that stores the "logged in" user temporarily 
+		We will be able to log in a new user per each browser tab */
+	useEffect(() => {
+		const currentUser = JSON.parse(sessionStorage.getItem('user') ?? '{}'); // Grab current "Logged in" user
+		if (currentUser.id) { // If exists, we know there is a "Logged in" user
+			setUser(currentUser); // We set the current "Logged in" user into state
+		}
+
+	}, []);
+
+
+	const login = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+	  
+		const formValue = (e.currentTarget.elements[0] as HTMLInputElement).value; // Extract login info from the form
+	  
+		const newUser = {
+		  id: Date.now().toLocaleString().concat(formValue),
+		  userName: formValue,
+		};
+	  
+		sessionStorage.setItem('user', JSON.stringify(newUser));
+		setUser(newUser); // Assuming setUser is defined in your component
+	  };
+
+	return (
+		<>
+			{user && user.id ? ( // If user is "Logged in" render talk element
+				<Home />
+			) : ( // If user is "Not Logged in" render Log 
+				<LoginLayout>
+					<LoginForm login={login}></LoginForm>
+				</LoginLayout>
+			)}
+		</>
+	);
 }
 
 export default Login;
