@@ -6,24 +6,27 @@ import "./Login.css";
 function Login() {
   const login = async () => {
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // You may need to include credentials: "include" if using cookies
-      });
-
-      if (response.ok) {
-        // Redirect the user to the provided URL for authentication
-        const { url } = await response.json();
-        window.location.href = url;
-      } else {
-        console.error("Failed to initiate login");
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
+      const domain = "api.intra.42.fr/oauth";
+      const audience = "a";
+      const scope = "public";
+      const clientId = "u-s4t2ud-5c1567ba9e786c33b15f2eb8f6919213808601f5859cf72aa525de7cae7f4597";
+      const responseType = "code";
+      const redirectUri = "http://localhost:5173/auth/callback";
+      
+      const response = await fetch(
+        `https://${domain}/authorize?` + 
+        `audience=${audience}&` + 
+        `scope=${scope}&` +
+        `response_type=${responseType}&` +
+        `client_id=${clientId}&` +
+        `redirect_uri=${redirectUri}`, {
+          redirect: "manual"
+        }
+      );
+  
+      window.location.replace(response.url);
     }
+    catch{}
   };
 
   return (

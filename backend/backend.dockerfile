@@ -9,6 +9,7 @@ WORKDIR /app
 
 RUN apk update && apk upgrade
 RUN apk update node
+EXPOSE 4242
 EXPOSE 4000
 
 
