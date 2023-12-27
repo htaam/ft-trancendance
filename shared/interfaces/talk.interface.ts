@@ -6,16 +6,16 @@ export interface User {
 
 export interface Room {
     name: string
-    admin: User
+    host: User
     users: User[]
-    // Probably will need to create an array of admins
+    admins: User[]
 }
 
 export interface Message {
     sender: User
     date: string
     content: string
-    channelName: string
+    roomName: string
 }
 
 export interface ServerToClientEvents {
@@ -24,5 +24,5 @@ export interface ServerToClientEvents {
 
 export interface ClientToServerEvents {
     talk: (e: Message) => void
-    joinChannel: (e: { user: User; channelName: string }) => void
+    joinRoom: (e: { user: User; roomName: string }) => void
 }
