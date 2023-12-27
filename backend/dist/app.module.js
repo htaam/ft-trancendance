@@ -22,6 +22,7 @@ const cats_module_1 = require("./cats/cats.module");
 const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
 const talk_module_1 = require("./talk/talk.module");
+const room_module_1 = require("./room/room.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -40,6 +41,7 @@ exports.AppModule = AppModule = __decorate([
             game_module_1.GameModule,
             cats_module_1.CatsModule,
             talk_module_1.TalkModule,
+            room_module_1.RoomModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, jwt_strategy_1.default],

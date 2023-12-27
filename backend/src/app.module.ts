@@ -15,6 +15,7 @@ import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path';
 import { TalkGateway } from './talk/talk.gateway';
 import { TalkModule } from './talk/talk.module';
+import { RoomModule } from './room/room.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { TalkModule } from './talk/talk.module';
     GameModule,
     CatsModule,
     TalkModule,
+    RoomModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],
