@@ -74,6 +74,22 @@ let AuthService = class AuthService {
             throw new common_1.HttpException('Error during registration request!', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    async fortyTwoAuth(req, session, res) {
+        try {
+            const fortyTwoId = req.user.id;
+            const fortyTwoAvatar = req.user._json.image.link;
+            const user = await this.usersService.findById(fortyTwoId);
+            if (!user) {
+                session.fortyTwoId = fortyTwoId;
+                session.fortyTwoAvatar = fortyTwoAvatar;
+                return res.redirect(process.env.FRONT_URL + '/register/setup');
+            }
+        }
+        catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
     async getAutenticatedUser(userName, decryptedPassword) {
         try {
             const user = await this.usersService.findByUsername(userName);

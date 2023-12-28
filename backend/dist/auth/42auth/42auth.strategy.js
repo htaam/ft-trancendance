@@ -9,13 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FortyTwoStrategy = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const passport_1 = require("@nestjs/passport");
 const passport_jwt_1 = require("passport-jwt");
-let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy) {
+let FortyTwoStrategy = class FortyTwoStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy, '42auth') {
     constructor(configService) {
-        console.log('JWT_SECRET:', configService.get('JWT_SECRET'));
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromExtractors([
                 (request) => {
@@ -27,13 +27,10 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
         });
         this.configService = configService;
     }
-    async validate(payload) {
-        return payload.user;
-    }
 };
-JwtStrategy = __decorate([
+exports.FortyTwoStrategy = FortyTwoStrategy;
+exports.FortyTwoStrategy = FortyTwoStrategy = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [config_1.ConfigService])
-], JwtStrategy);
-exports.default = JwtStrategy;
-//# sourceMappingURL=jwt.strategy.js.map
+], FortyTwoStrategy);
+//# sourceMappingURL=42auth.strategy.js.map

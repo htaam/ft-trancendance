@@ -18,24 +18,31 @@ const passport_1 = require("@nestjs/passport");
 const jwt_strategy_1 = require("../auth/jwtauth/jwt.strategy");
 const _42auth_module_1 = require("../auth/42auth/42auth.module");
 const axios_1 = require("@nestjs/axios");
+const _42auth_strategy_1 = require("../auth/42auth/42auth.strategy");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule, axios_1.HttpModule, _42auth_module_1.Auth42Module, passport_1.PassportModule, config_1.ConfigModule, jwt_1.JwtModule.registerAsync({
+        imports: [
+            user_module_1.UserModule,
+            axios_1.HttpModule,
+            _42auth_module_1.Auth42Module,
+            passport_1.PassportModule,
+            config_1.ConfigModule,
+            jwt_1.JwtModule.registerAsync({
                 imports: [config_1.ConfigModule],
                 inject: [config_1.ConfigService],
                 useFactory: async (configService) => ({
                     secret: configService.get('JWT_SECRET'),
                     signOptions: {
-                        expiresIn: `${configService.get("JWT_EXIRATION_TIME")}s`,
+                        expiresIn: `${configService.get('JWT_EXPIRATION_TIME')}s`,
                     },
                 }),
             }),
         ],
         controllers: [auth_controller_1.AuthController],
-        providers: [auth_service_1.AuthService, local_strategy_1.LocalStrategy, jwt_strategy_1.default]
+        providers: [auth_service_1.AuthService, local_strategy_1.LocalStrategy, jwt_strategy_1.default, _42auth_strategy_1.FortyTwoStrategy],
     })
 ], AuthModule);
 //# sourceMappingURL=auth.module.js.map

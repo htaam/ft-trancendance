@@ -6,12 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FortyTwoAuthGuard = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
-let JwtAuthGuard = class JwtAuthGuard extends (0, passport_1.AuthGuard)('jwt') {
+let FortyTwoAuthGuard = class FortyTwoAuthGuard extends (0, passport_1.AuthGuard)('42auth') {
 };
-JwtAuthGuard = __decorate([
+exports.FortyTwoAuthGuard = FortyTwoAuthGuard;
+exports.FortyTwoAuthGuard = FortyTwoAuthGuard = __decorate([
     (0, common_1.Injectable)()
-], JwtAuthGuard);
-exports.default = JwtAuthGuard;
-//# sourceMappingURL=jwt-auth.guard.js.map
+], FortyTwoAuthGuard);
+//# sourceMappingURL=42auth.guard.js.map

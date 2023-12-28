@@ -21,11 +21,15 @@ const user_register_dto_1 = require("../dtos/user-register.dto");
 const _42auth_service_1 = require("../auth/42auth/42auth.service");
 const user_service_1 = require("../services/user.service");
 const bcrypt = require("bcrypt");
+const _42auth_guard_1 = require("../auth/42auth/42auth.guard");
 let AuthController = class AuthController {
     constructor(authService, auth42Service, userService) {
         this.authService = authService;
         this.auth42Service = auth42Service;
         this.userService = userService;
+    }
+    fortyTwoAuth(req, session, res) {
+        return this.authService.fortyTwoAuth(req, session, res);
     }
     async register(registrationData) {
         return this.authService.register(registrationData);
@@ -156,6 +160,16 @@ let AuthController = class AuthController {
     }
 };
 exports.AuthController = AuthController;
+__decorate([
+    (0, common_1.Get)('42'),
+    (0, common_1.UseGuards)(_42auth_guard_1.FortyTwoAuthGuard),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Session)()),
+    __param(2, (0, common_1.Res)({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "fortyTwoAuth", null);
 __decorate([
     (0, common_1.Post)('register'),
     __param(0, (0, common_1.Body)()),

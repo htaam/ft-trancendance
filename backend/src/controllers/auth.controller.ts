@@ -5,6 +5,7 @@ import {
   Post,
   Body,
   UseGuards,
+  Session,
   Req,
   Res,
   Get,
@@ -20,6 +21,8 @@ import { Auth42Service } from '../auth/42auth/42auth.service';
 import { UserService } from 'src/services/user.service';
 import * as bcrypt from 'bcrypt';
 import { Request } from 'express';
+import { FortyTwoAuthGuard } from 'src/auth/42auth/42auth.guard';
+import { PassThrough } from 'stream';
 
 @Controller('auth')
 export class AuthController {
@@ -28,6 +31,16 @@ export class AuthController {
     private auth42Service: Auth42Service,
     private userService: UserService,
   ) {}
+
+  @Get('42')
+  @UseGuards(FortyTwoAuthGuard)
+  fortyTwoAuth(
+    @Req() req,
+    @Session() session,
+    @Res({ passthrough: true }) res,
+  ) {
+    return this.authService.fortyTwoAuth(req, session, res);
+  }
 
   @Post('register')
   async register(@Body() registrationData: UserRegisterDto) {

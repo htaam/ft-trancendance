@@ -1,25 +1,24 @@
+import { useState } from "react";
 import Button from "@mui/material/Button";
 import DiskImage from "../../images/disk.png";
 import LogoImage from "../../images/PONG-logo.png";
 import "./Login.css";
 
 function Login() {
+  const [error, setError] = useState(null);
+
   const login = async () => {
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // You may need to include credentials: "include" if using cookies
-      });
+      // Make an API request to the 42 API for authentication
+      const response = await fetch("http://localhost:3000/auth/42");
+      const data = await response.json();
 
       if (response.ok) {
-        // Redirect the user to the provided URL for authentication
-        const { url } = await response.json();
-        window.location.href = url;
+        // Redirect to Home page or handle success
+        window.location.href = "/home";
       } else {
-        console.error("Failed to initiate login");
+        // Handle authentication error
+        setError(data.error || "Authentication failed");
       }
     } catch (error) {
       console.error("An error occurred:", error);
@@ -38,8 +37,9 @@ function Login() {
         variant="contained"
         color="primary"
       >
-        Login with 42 Intra
+        Login with 42
       </Button>
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 }

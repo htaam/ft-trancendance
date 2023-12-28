@@ -42,6 +42,7 @@ export class UserService {
     );
   }
 
+
   async findByUsername(userName: string) {
     const user = await this.userRepo.findOne({
       where: { userName: userName },

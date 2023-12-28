@@ -12,6 +12,7 @@ export declare class AuthService {
     private readonly httpService;
     constructor(usersService: UserService, jwtService: JwtService, configService: ConfigService, httpService: HttpService);
     register(registerData: UserRegisterDto): Promise<User>;
+    fortyTwoAuth(req: any, session: any, res: any): Promise<any>;
     getAutenticatedUser(userName: string, decryptedPassword: string): Promise<User>;
     private verifyPassword;
     getJwtToken(user: User): string;
