@@ -1,21 +1,21 @@
 import React from 'react';
-import "./login.css";
+import "./registrationForm.css";
 
-export const LoginForm = ({
-  login,
+export const RegForm = ({
+  register,
 }: {
-  login: (e: React.FormEvent<HTMLFormElement>) => void;
+  register: (e: React.FormEvent<HTMLFormElement>) => void;
 }) => {
   return (
     <div className="my-auto">
       <form 
         onSubmit={(e) => {
           e.preventDefault();
-          login(e);
+          register(e);
       }}
       className="form" autoComplete="off">
       <div className="control">
-        <h1>Sign In</h1>
+        <h1>Register</h1>
       </div>
 
       <div className="control block-cube block-input">
@@ -55,7 +55,7 @@ export const LoginForm = ({
         <div className="bg">
           <div className="bg-inner"></div>
         </div>
-        <div className="text">Log In</div>
+        <div className="text">Register</div>
       </button>
 
       <div className="credits">

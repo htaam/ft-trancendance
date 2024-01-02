@@ -1,7 +1,24 @@
+import Button from "@mui/material/Button";
+import DiskImage from '../../images/disk.png'
+import LogoImage from "../../images/PONG-logo.png";
+import "./Login.css";
+import{ User } from '../../../../shared/interfaces/talk.interface'
 import { useEffect, useState } from "react";
-import { User } from '../../../../shared/interfaces/talk.interface';
+import Home from "../Home/Home";
 
-function Login() {
+export const  Login = () => {
+
+  // Store the current user 
+  const [user, setUser] = useState<User>();
+
+  // Session Storage is a browser API that stores the 'logged in' user temporarily
+  useEffect(() => {
+    const currentUser = JSON.parse(sessionStorage.getItem('user') ?? '{}'); // grab current loggedin user
+    if (currentUser.id) {
+      setUser(currentUser); // we set the current logged in user into state
+    }
+  }, []);
+
   const login = async () => {
     try {
       const domain = "api.intra.42.fr/oauth";
@@ -27,45 +44,28 @@ function Login() {
     catch{}
   };
 
-	// Store the current user of the client
-	const [user, setUser] = useState<User>();
-
-	/* SessionStorage is a browser API that stores the "logged in" user temporarily 
-		We will be able to log in a new user per each browser tab */
-	useEffect(() => {
-		const currentUser = JSON.parse(sessionStorage.getItem('user') ?? '{}'); // Grab current "Logged in" user
-		if (currentUser.id) { // If exists, we know there is a "Logged in" user
-			setUser(currentUser); // We set the current "Logged in" user into state
-		}
-
-	}, []);
-
-
-	const login = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-	  
-		const formValue = (e.currentTarget.elements[0] as HTMLInputElement).value; // Extract login info from the form
-	  
-		const newUser = {
-		  id: Date.now().toLocaleString().concat(formValue),
-		  userName: formValue,
-		};
-	  
-		sessionStorage.setItem('user', JSON.stringify(newUser));
-		setUser(newUser); // Assuming setUser is defined in your component
-	  };
-
-	return (
-		<>
-			{user && user.id ? ( // If user is "Logged in" render talk element
-				<Home />
-			) : ( // If user is "Not Logged in" render Log 
-				<LoginLayout>
-					<LoginForm login={login}></LoginForm>
-				</LoginLayout>
-			)}
-		</>
-	);
+  return (
+    <>
+      { user && user.id ? (
+        <Home />
+      ) : (
+        <div className="login">
+          <img className="disk" src={DiskImage} alt="Diskette Illustration" />
+          <img className="logo" src={LogoImage} alt="Logo Pong" />
+          <p className="slogan">Play Old Nice Games</p>
+          <Button
+            className="button"
+            onClick={login}
+            type="button"
+            variant="contained"
+            color="primary"
+          >
+            Login with 42 Intra
+          </Button>
+        </div>
+      )}
+    </>
+  );
 }
 
 export default Login;

@@ -8,7 +8,8 @@ import { ChatModule } from './modules/chat.module';
 import { MessageModule } from './modules/message.module';
 import { GameModule } from './modules/game.module';
 import { TalkModule } from './talk/talk.module';
-import { RoomModule } from './room/room.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -20,7 +21,9 @@ import { RoomModule } from './room/room.module';
     MessageModule,
     GameModule,
     TalkModule,
-    RoomModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', '..', '..', 'dist', 'client'),
+    })
   ],
   controllers: [],
   providers: [],

@@ -17,7 +17,8 @@ const chat_module_1 = require("./modules/chat.module");
 const message_module_1 = require("./modules/message.module");
 const game_module_1 = require("./modules/game.module");
 const talk_module_1 = require("./talk/talk.module");
-const room_module_1 = require("./room/room.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
@@ -37,7 +38,9 @@ exports.AppModule = AppModule = __decorate([
             message_module_1.MessageModule,
             game_module_1.GameModule,
             talk_module_1.TalkModule,
-            room_module_1.RoomModule,
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', '..', '..', '..', 'dist', 'client'),
+            })
         ],
         controllers: [],
         providers: [],

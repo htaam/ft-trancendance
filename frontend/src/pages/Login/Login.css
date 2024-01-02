@@ -1,14 +1,56 @@
-.container-row {
+.login {
   width: 100%;
   display: flex;
-  flex-flow: row;
-  justify-content: left;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #463366;
 }
 
-.container-column {
+.login > div {
+  margin-top: 25px;
+  color: aquamarine;
+}
+
+.disk {
+  width: 50%;
+  max-width: 40vh;
+  margin-bottom: 50px;;
+}
+
+.login .logo {
+  width: 50%;
+  max-width: 40vh;
+  margin-bottom: 5px;
+}
+
+.slogan {
+  color: white;
+  font-size: 25px;
+}
+
+.login .button {
+  margin-top: 25px;
+  width: 20vw;
+  background: #5cb9bd;
+  color: white;
+  font-size: 15px;
+}
+
+.login > .disk {
   display: flex;
-  flex-flow: row;
+  align-items: center;
   justify-content: center;
-  width: 80%;
-  height: 98vh;
+  margin-top: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+
+  .slogan {
+    font-size: 3vw;
+  }
+  .login .button {
+    width: 200px;
+    font-size: 15px;
+  }
 }

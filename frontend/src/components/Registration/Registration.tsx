@@ -1,46 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import { User } from '../../../../shared/interfaces/talk.interface'
+import { LoginLayout } from '../../pages/Talk/Layout/LoginLayout';
+import { RegForm } from '../RegistrationForm/registrationForm'
+import Home from '../../pages/Home/Home';
 
-const Registration: React.FC = () => {
-    const [nickname, setNickname ] = useState('');
-    const [country, setCountry] = useState('');
-    const [avatar, setAvatar] = useState('');
+export const Registration = () => {
 
+    const [user, setUser] = useState<User>();
+    
     useEffect(() => {
-        const socket = io('http://localhost:3000');
-
-        // Listen for registrations
-        socket.on('registrationResponse', (response: any) => {
-            console.log(response); 
-        });
-
-        return () => {
-            socket.disconnect();
-        };
+        const currentUser = JSON.parse(sessionStorage.getItem('user') ?? '{}');
+        if (currentUser.id) {
+            setUser(currentUser);
+        }
     }, []);
+      
+    const register = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-    const handleRegister = () => {
-        const socket = io('http://localhost:3000');
+        const formValue = (e.currentTarget.elements[0] as HTMLInputElement).value;
 
-        // Emit data to the server
-        socket.emit('registerPlayer', { nickname, country, avatar });
+        const newUser = {
+            id: Date.now().toLocaleString().concat(formValue),
+            userName: formValue,
+        };
+
+        sessionStorage.setItem('user', JSON.stringify(newUser));
+        setUser(newUser);
     };
 
     return (
-        <div>
-            <h1>Registration</h1>
-            <label>Nickname:</label>
-            <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} />
-            <br />
-            <label>Country:</label>
-            <input type="text" value={country} onChange={(e) => setCountry(e.target.value)} />
-            <br />
-            <label>Avatar URL:</label>
-            <input type="text" value={avatar} onChange={(e) => setAvatar(e.target.value)} />
-            <br />
-            <button onClick={handleRegister}>Register</button>
-        </div>
+        <>
+            {user && user.id ? (
+                <Home />
+            ) : (
+                <LoginLayout>
+                    <RegForm register={register}></RegForm>
+                </LoginLayout>
+            )}
+        </>
     );
 };
 
 export default Registration;
+
+
+

@@ -1,7 +1,7 @@
 export interface User {
     id: string
     userName: string
-    socketId: string
+    // socketId: string
 }
 
 export interface Room {
@@ -15,7 +15,7 @@ export interface Message {
     sender: User
     date: string
     content: string
-    roomName: string
+    // roomName: string
 }
 
 export interface ServerToClientEvents {

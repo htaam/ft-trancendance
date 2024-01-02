@@ -53,7 +53,6 @@ export const Talk = () => {
 		};
 	}, []);
 
-
 	const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 	 
