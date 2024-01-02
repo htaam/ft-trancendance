@@ -6,7 +6,7 @@ import Play from "./pages/Play/Play";
 import Chat from "./pages/Chat/Chat";
 import Profile from "./pages/Profile/Profile";
 import LeaderBoard from "./pages/Leaderboard/Leaderboard";
-import RetLogin from "./pages/Auth/retLogin";
+import Callback from "./pages/Auth/callback.tsx";
 import TwoAuth from "./pages/Auth/TwoAuth.tsx";
 
 
@@ -30,7 +30,7 @@ export default function App() {
             <Route path="/Profile" element={<Profile />} />
             <Route path="/Leaderboard" element={<LeaderBoard />} />
             <Route path="/Reg" element={<Registration />} />
-            <Route path="/RetLogin" element={<RetLogin />} />
+            <Route path="/auth/callback" element={<Callback />} />
             <Route path="/TwoAuth" element={<TwoAuth />} />
             <Route path="/Talk" element={<Talk />} />
           </Routes>
