@@ -11,6 +11,7 @@ import {
   Get,
   HttpException,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { LocalAuthGuard } from '../auth/local-auth.guard';
 import RequestWithUser from '../interfaces/request-with-user.i';
@@ -31,6 +32,45 @@ export class AuthController {
     private auth42Service: Auth42Service,
     private userService: UserService,
   ) {}
+
+  @Get('callback')
+  async callback(@Query('code') code: string, @Res() res): Promise<void> {
+    try {
+      const domain = "api.intra.42.fr/oauth";
+      const grant_type = "authorization_code";
+      const client_id = "u-s4t2ud-5c1567ba9e786c33b15f2eb8f6919213808601f5859cf72aa525de7cae7f4597";
+      const client_secret = "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";
+      const redirect_uri = "http://localhost:5173/auth/callback";
+
+      const tokenResponse = await fetch(
+        `https://${domain}/token?` +
+        `grant_type=${grant_type}&` +
+        `client_id=${client_id}&` +
+        `client_secret=${client_secret}&` +
+        `code=${code}&` +
+        `redirect_uri=${redirect_uri}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "manual"
+        }
+      );
+
+      if (tokenResponse.ok) {
+        const tokenResult = await tokenResponse.json();
+        // Handle the token result as needed (e.g., store in a database, respond to the client, etc.)
+        console.log("BACK Token Result:", tokenResult);
+        res.status(HttpStatus.OK).json(tokenResult);
+      } else {
+        console.error('BACK Failed to get token:', tokenResponse.status, tokenResponse.statusText);
+        throw new HttpException(tokenResponse.statusText, tokenResponse.status);
+      }
+    } catch (error) {
+      console.error('BACK Error during token request:', error);
+      throw new HttpException('Internal Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 
   @Get('42')
   @UseGuards(FortyTwoAuthGuard)
@@ -75,62 +115,62 @@ export class AuthController {
     return response.send(request.user);
   }
 
-  @Get('callback')
-  async handleToken(@Req() request: Request, @Res() response: Response) {
-    const code: string = request['query'].code as string;
-    const token = await this.auth42Service.accessToken(code);
-    const userInformation = await this.auth42Service.getUserInformation(
-      token['access_token'],
-    );
-    try {
-      const user = await this.userService.findByUsername(
-        userInformation['login'],
-      );
-      const hash = await bcrypt.hash(user.id, 10);
-      await this.authService.redirectUserAuth(response, hash);
-    } catch (e) {
-      const linkImg = await this.authService.downloadImage(
-        userInformation['image']['link'] as string,
-      );
-      const newUser: UserRegisterDto = {
-        userName: userInformation['login'],
-        password: process.env.PW_42AUTH,
-        passwordRepeat: process.env.PW_42AUTH,
-        email: userInformation['email'],
-        avatar: linkImg as string,
-        is2FOn: false,
-        secret2F: 'notset',
-        displayName: userInformation['login'],
-        elo: 800,
-        blocked: [],
-        chat: [],
-        friends: [],
-        msgHist: '',
-        idWebSocket: '',
-        gameNumber: 0,
-        gameWin: 0,
-        gameLose: 0,
-        winLoseRate: '',
-        totalPointGet: 0,
-        totalPointTake: 0,
-        pointGetTakeRate: '',
-        winStreak: 0,
-        gameHist: '',
-        xp: 0,
-        totalGame: 0,
-        socketID: '',
-        slot: 0,
-        isActive: false,
-      };
-      await this.authService.register(newUser);
-      const user = await this.userService.findByUsername(
-        userInformation['login'],
-      );
-      const hash = await bcrypt.hash(user.id, 10);
-      await this.userService.updateImage(user.id, linkImg as string);
-      await this.authService.redirectUserAuth(response, hash);
-    }
-  }
+  // @Get('callback')
+  // async handleToken(@Req() request: Request, @Res() response: Response) {
+  //   const code: string = request['query'].code as string;
+  //   const token = await this.auth42Service.accessToken(code);
+  //   const userInformation = await this.auth42Service.getUserInformation(
+  //     token['access_token'],
+  //   );
+  //   try {
+  //     const user = await this.userService.findByUsername(
+  //       userInformation['login'],
+  //     );
+  //     const hash = await bcrypt.hash(user.id, 10);
+  //     await this.authService.redirectUserAuth(response, hash);
+  //   } catch (e) {
+  //     const linkImg = await this.authService.downloadImage(
+  //       userInformation['image']['link'] as string,
+  //     );
+  //     const newUser: UserRegisterDto = {
+  //       userName: userInformation['login'],
+  //       password: process.env.PW_42AUTH,
+  //       passwordRepeat: process.env.PW_42AUTH,
+  //       email: userInformation['email'],
+  //       avatar: linkImg as string,
+  //       is2FOn: false,
+  //       secret2F: 'notset',
+  //       displayName: userInformation['login'],
+  //       elo: 800,
+  //       blocked: [],
+  //       chat: [],
+  //       friends: [],
+  //       msgHist: '',
+  //       idWebSocket: '',
+  //       gameNumber: 0,
+  //       gameWin: 0,
+  //       gameLose: 0,
+  //       winLoseRate: '',
+  //       totalPointGet: 0,
+  //       totalPointTake: 0,
+  //       pointGetTakeRate: '',
+  //       winStreak: 0,
+  //       gameHist: '',
+  //       xp: 0,
+  //       totalGame: 0,
+  //       socketID: '',
+  //       slot: 0,
+  //       isActive: false,
+  //     };
+  //     await this.authService.register(newUser);
+  //     const user = await this.userService.findByUsername(
+  //       userInformation['login'],
+  //     );
+  //     const hash = await bcrypt.hash(user.id, 10);
+  //     await this.userService.updateImage(user.id, linkImg as string);
+  //     await this.authService.redirectUserAuth(response, hash);
+  //   }
+  // }
 
   @Post('2fa/turn-on')
   @UseGuards(JwtAuthGuard)

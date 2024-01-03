@@ -17,6 +17,7 @@ import { Server } from 'socket.io';
     origin: '*', 
   }, transports: ['websocket'],
 })
+
 export class TalkGateway {
   @WebSocketServer() server: Server = new Server<
   ServerToClientEvents,
@@ -29,6 +30,7 @@ export class TalkGateway {
     @MessageBody()
     payload: Message,
   ): Promise<Message> {
+    console.log("EU SOU A MENSAGEM:" + payload);
     this.logger.log(payload);
     this.server.emit('talk', payload); //broadcast messages
     return payload;

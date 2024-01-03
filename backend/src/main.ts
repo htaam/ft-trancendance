@@ -2,7 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
-
+import * as cors from 'cors';
 /*
     whitelist: true, -> Removes passed parameters not defined in DTOs
     forbidNonWhitelisted: true, -> Adds an error to the previous rule
@@ -16,6 +16,7 @@ async function bootstrap() {
   //   forbidNonWhitelisted: true,
   //   transform: true
   // }));
+  app.use(cors());
   await app.listen(process.env.BACK_PORT);
 
   app.enableShutdownHooks();   // Gracefully shutdown the server

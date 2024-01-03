@@ -22,6 +22,7 @@ export default function App() {
     <div className="App" id="main">
       <RecoilRoot>
         <Router>
+          {/*<AQUI VAI FICAR O CONTEXTO>*/}
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/Home" element={<Home />} />
@@ -34,6 +35,7 @@ export default function App() {
             <Route path="/TwoAuth" element={<TwoAuth />} />
             <Route path="/Talk" element={<Talk />} />
           </Routes>
+          {/*<AQUI VAI FICAR O CONTEXTO>*/}
         </Router>
       </RecoilRoot>
     </div>

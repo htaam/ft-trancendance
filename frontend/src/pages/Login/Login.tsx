@@ -24,7 +24,7 @@ export const  Login = () => {
       const domain = "api.intra.42.fr/oauth";
       const audience = "a";
       const scope = "public";
-      const clientId = "u-s4t2ud-5c1567ba9e786c33b15f2eb8f6919213808601f5859cf72aa525de7cae7f4597";
+      const client_id = "u-s4t2ud-5c1567ba9e786c33b15f2eb8f6919213808601f5859cf72aa525de7cae7f4597";
       const responseType = "code";
       const redirectUri = "http://localhost:5173/auth/callback";
       
@@ -33,12 +33,11 @@ export const  Login = () => {
         `audience=${audience}&` + 
         `scope=${scope}&` +
         `response_type=${responseType}&` +
-        `client_id=${clientId}&` +
+        `client_id=${client_id}&` +
         `redirect_uri=${redirectUri}`, {
           redirect: "manual"
         }
       );
-  
       window.location.replace(response.url);
     }
     catch{}

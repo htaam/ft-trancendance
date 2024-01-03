@@ -22,6 +22,7 @@ let TalkGateway = class TalkGateway {
         this.logger = new common_1.Logger('TalkGateway');
     }
     async handleEvent(payload) {
+        console.log("EU SOU A MENSAGEM:" + payload);
         this.logger.log(payload);
         this.server.emit('talk', payload);
         return payload;
