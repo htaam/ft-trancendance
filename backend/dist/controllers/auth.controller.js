@@ -48,6 +48,7 @@ let AuthController = class AuthController {
     }
     async handleToken(request, response) {
         const code = request['query'].code;
+        console.log(code);
         const token = await this.auth42Service.accessToken(code);
         const userInformation = await this.auth42Service.getUserInformation(token['access_token']);
         try {
