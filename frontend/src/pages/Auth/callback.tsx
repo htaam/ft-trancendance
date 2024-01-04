@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import queryString from "query-string";
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 
 const callback = ({ }) => {
@@ -14,6 +15,7 @@ const callback = ({ }) => {
 
   return (
     <div className="callback">
+      <Sidebar />
     </div>
   );
 }

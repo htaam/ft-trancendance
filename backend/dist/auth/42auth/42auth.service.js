@@ -20,7 +20,7 @@ let Auth42Service = class Auth42Service {
             if (!data)
                 throw new common_1.HttpException('Empty user token', common_1.HttpStatus.BAD_REQUEST);
             else {
-                console.log('USER TOKEN CORRECT');
+                console.log("TOKEN: ", await data);
                 return data;
             }
         }

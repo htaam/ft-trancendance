@@ -22,7 +22,7 @@ export class Auth42Service {
       if (!data)
         throw new HttpException('Empty user token', HttpStatus.BAD_REQUEST);
       else {
-        console.log('USER TOKEN CORRECT');
+        console.log("TOKEN: ",await data);
         return data;
       }
     } catch (error) {
