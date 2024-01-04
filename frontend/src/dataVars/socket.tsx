@@ -8,7 +8,7 @@ export class mySocket {
   private _socket: Socket;
 
   constructor() {
-    this._socket = io("http://localhost:3000");
+    this._socket = io("http://localhost:4242");
     this._socket.on("connect", () => {
       console.log("connection id: ", this._socket.id);
     });

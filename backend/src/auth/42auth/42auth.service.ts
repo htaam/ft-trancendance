@@ -21,7 +21,10 @@ export class Auth42Service {
       const data = await response.json();
       if (!data)
         throw new HttpException('Empty user token', HttpStatus.BAD_REQUEST);
-      return data;
+      else {
+        console.log('USER TOKEN CORRECT');
+        return data;
+      }
     } catch (error) {
       throw new HttpException('Get user token error', HttpStatus.BAD_REQUEST);
     }

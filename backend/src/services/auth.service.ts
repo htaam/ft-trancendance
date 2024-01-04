@@ -143,7 +143,7 @@ export class AuthService {
   //redirect user to authenticate using 2fa
   async redirectUserAuth(@Res() response: Response, hash: string) {
     const hash64 = Buffer.from(hash, 'binary').toString('base64');
-    response.redirect(301, process.env.SITE_URL + `:3000/auth/2fa/${hash64}`);
+    response.redirect(301, process.env.SITE_URL + `:4000/auth/2fa/${hash64}`);
   }
 
   async downloadImage(url: string) {

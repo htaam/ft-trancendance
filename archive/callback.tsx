@@ -1,26 +1,3 @@
-import React, { useState, useEffect } from "react";
-import queryString from "query-string";
-
-
-const callback = ({ }) => {
-  const { code } = queryString.parse(window.location.search);
-  const [callbackData, setcallbackData] = useState("none");
-
-  useEffect(() => {
-    fetch(`http://localhost:4000/auth/callback?code=${code}`, {
-      method: 'GET',
-    })}
-  )
-
-  return (
-    <div className="callback">
-    </div>
-  );
-}
-
-export default callback;
-
-
 // import { useState, useEffect } from "react";
 // import queryString from "query-string";
 // import { User } from '../../../../shared/interfaces/talk.interface'
@@ -29,7 +6,7 @@ export default callback;
 // import Home from '../../pages/Home/Home';
 
 // const Callback = () => {
-//   const { code } = queryString.parse(window.location.search);
+//   const code = new URLSearchParams(document.location.search);
 //   const [user, setUser] = useState<User>();
 
 // 	const GetToken = async () => {
@@ -38,7 +15,7 @@ export default callback;
 // 				const domain = "api.intra.42.fr";
 // 				const grant_type = "authorization_code";
 // 				const client_id = "u-s4t2ud-5c1567ba9e786c33b15f2eb8f6919213808601f5859cf72aa525de7cae7f4597";
-// 				const client_secret = "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";
+// 				const client_secret = "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";
 // 				const redirect_uri = "http://localhost:5173/auth/callback";
 	
 // 				const requestBody = new URLSearchParams();
@@ -51,11 +28,9 @@ export default callback;
 // 				const response = await fetch(
 // 					`https://${domain}/oauth/token`, {
 // 						method: 'POST',
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded',
-//               'Authorization': `Basic ${btoa(`${client_id}:${client_secret}`)}`,
-//               'Access-Control-Allow-Origin': '*',
-//           },
+// 						headers: {
+// 							'Content-Type': 'application/x-www-form-urlencoded',
+// 						},
 // 						body: requestBody.toString(),
 // 						redirect: "manual"
 // 					});

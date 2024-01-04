@@ -3,19 +3,14 @@ import "./App.css";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Play from "./pages/Play/Play";
-import Chat from "./pages/Chat/Chat";
 import Profile from "./pages/Profile/Profile";
 import LeaderBoard from "./pages/Leaderboard/Leaderboard";
 import Callback from "./pages/Auth/callback.tsx";
 import TwoAuth from "./pages/Auth/TwoAuth.tsx";
-
-
 import Registration from "./components/Registration/Registration";
-import { mySocket } from "./dataVars/socket";
 import { RecoilRoot } from "recoil";
 import Talk from "./pages/Talk/Talk";
 
-export const socket = new mySocket();
 
 export default function App() {
   return (
@@ -27,7 +22,6 @@ export default function App() {
             <Route path="/" element={<Login />} />
             <Route path="/Home" element={<Home />} />
             <Route path="/Play" element={<Play />} />
-            <Route path="/Chat" element={<Chat />} />
             <Route path="/Profile" element={<Profile />} />
             <Route path="/Leaderboard" element={<LeaderBoard />} />
             <Route path="/Reg" element={<Registration />} />

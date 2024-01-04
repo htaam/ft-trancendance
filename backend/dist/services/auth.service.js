@@ -119,7 +119,7 @@ let AuthService = class AuthService {
     }
     async redirectUserAuth(response, hash) {
         const hash64 = Buffer.from(hash, 'binary').toString('base64');
-        response.redirect(301, process.env.SITE_URL + `:3000/auth/2fa/${hash64}`);
+        response.redirect(301, process.env.SITE_URL + `:4000/auth/2fa/${hash64}`);
     }
     async downloadImage(url) {
         const imgLink = `/images/user-image/${(0, uuid_1.v4)()}.png`;

@@ -12,9 +12,9 @@ import { MessageForm } from "./Messages/MessageForm";
 import { Header } from "../Talk/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
-const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:3000", {
-  withCredentials: true, // If needed
-});
+// const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:4000", {
+//   withCredentials: true, // If needed
+// });
 
 export const Talk = () => {
 	// Store the clients current state of the connection

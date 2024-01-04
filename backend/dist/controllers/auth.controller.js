@@ -28,40 +28,6 @@ let AuthController = class AuthController {
         this.auth42Service = auth42Service;
         this.userService = userService;
     }
-    async callback(code, res) {
-        try {
-            const domain = "api.intra.42.fr/oauth";
-            const grant_type = "authorization_code";
-            const client_id = "u-s4t2ud-5c1567ba9e786c33b15f2eb8f6919213808601f5859cf72aa525de7cae7f4597";
-            const client_secret = "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";
-            const redirect_uri = "http://localhost:5173/auth/callback";
-            const tokenResponse = await fetch(`https://${domain}/token?` +
-                `grant_type=${grant_type}&` +
-                `client_id=${client_id}&` +
-                `client_secret=${client_secret}&` +
-                `code=${code}&` +
-                `redirect_uri=${redirect_uri}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                redirect: "manual"
-            });
-            if (tokenResponse.ok) {
-                const tokenResult = await tokenResponse.json();
-                console.log("BACK Token Result:", tokenResult);
-                res.status(common_1.HttpStatus.OK).json(tokenResult);
-            }
-            else {
-                console.error('BACK Failed to get token:', tokenResponse.status, tokenResponse.statusText);
-                throw new common_1.HttpException(tokenResponse.statusText, tokenResponse.status);
-            }
-        }
-        catch (error) {
-            console.error('BACK Error during token request:', error);
-            throw new common_1.HttpException('Internal Server Error', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
     fortyTwoAuth(req, session, res) {
         return this.authService.fortyTwoAuth(req, session, res);
     }
@@ -83,6 +49,54 @@ let AuthController = class AuthController {
     }
     async logcheck(request, response) {
         return response.send(request.user);
+    }
+    async handleToken(request, response) {
+        const code = request['query'].code;
+        const token = await this.auth42Service.accessToken(code);
+        const userInformation = await this.auth42Service.getUserInformation(token['access_token']);
+        try {
+            const user = await this.userService.findByUsername(userInformation['login']);
+            const hash = await bcrypt.hash(user.id, 10);
+            await this.authService.redirectUserAuth(response, hash);
+        }
+        catch (e) {
+            const linkImg = await this.authService.downloadImage(userInformation['image']['link']);
+            const newUser = {
+                userName: userInformation['login'],
+                password: process.env.PW_42AUTH,
+                passwordRepeat: process.env.PW_42AUTH,
+                email: userInformation['email'],
+                avatar: linkImg,
+                is2FOn: false,
+                secret2F: 'notset',
+                displayName: userInformation['login'],
+                elo: 800,
+                blocked: [],
+                chat: [],
+                friends: [],
+                msgHist: '',
+                idWebSocket: '',
+                gameNumber: 0,
+                gameWin: 0,
+                gameLose: 0,
+                winLoseRate: '',
+                totalPointGet: 0,
+                totalPointTake: 0,
+                pointGetTakeRate: '',
+                winStreak: 0,
+                gameHist: '',
+                xp: 0,
+                totalGame: 0,
+                socketID: '',
+                slot: 0,
+                isActive: false,
+            };
+            await this.authService.register(newUser);
+            const user = await this.userService.findByUsername(userInformation['login']);
+            const hash = await bcrypt.hash(user.id, 10);
+            await this.userService.updateImage(user.id, linkImg);
+            await this.authService.redirectUserAuth(response, hash);
+        }
     }
     async turnOnTwoFactorAuthentication(request, body) {
         const userUp = await this.userService.findById(request.user.id);
@@ -147,14 +161,6 @@ let AuthController = class AuthController {
 };
 exports.AuthController = AuthController;
 __decorate([
-    (0, common_1.Get)('callback'),
-    __param(0, (0, common_1.Query)('code')),
-    __param(1, (0, common_1.Res)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
-    __metadata("design:returntype", Promise)
-], AuthController.prototype, "callback", null);
-__decorate([
     (0, common_1.Get)('42'),
     (0, common_1.UseGuards)(_42auth_guard_1.FortyTwoAuthGuard),
     __param(0, (0, common_1.Req)()),
@@ -201,6 +207,14 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "logcheck", null);
+__decorate([
+    (0, common_1.Get)('callback'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "handleToken", null);
 __decorate([
     (0, common_1.Post)('2fa/turn-on'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.default),

@@ -10,7 +10,7 @@ function Login() {
   const login = async () => {
     try {
       // Make an API request to the 42 API for authentication
-      const response = await fetch("http://localhost:3000/auth/42");
+      const response = await fetch("http://localhost:4000/auth/42");
       const data = await response.json();
 
       if (response.ok) {

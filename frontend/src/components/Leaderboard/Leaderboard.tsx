@@ -2,7 +2,7 @@
 import "./Leaderboard.css";
 
 import * as leaderboard from "../../images/leaderboard-icon.png";
-import Profiles from "./Profiles";
+// import Profiles from "./Profiles";
 
 const LeaderBoard: React.FC = () => {
   //   const [period, setPeriod] = useState(0);
@@ -35,7 +35,7 @@ const LeaderBoard: React.FC = () => {
       </div> */}
 
       {/* <Profiles DataBoard={between(DataBoard, period)}></Profiles> */}
-      <Profiles></Profiles>
+      {/* <Profiles></Profiles> */}
 
       <script src="sidebar.js"></script>
     </div>

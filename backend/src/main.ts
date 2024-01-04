@@ -1,22 +1,18 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { NestExpressApplication } from '@nestjs/platform-express';
-import * as cors from 'cors';
-/*
-    whitelist: true, -> Removes passed parameters not defined in DTOs
-    forbidNonWhitelisted: true, -> Adds an error to the previous rule
-    transform: true, -> Automatically try to convert variables to the expected type (string <-> number)
-*/
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  // app.useGlobalPipes(new ValidationPipe({
-  //   whitelist: true,
-  //   forbidNonWhitelisted: true,
-  //   transform: true
-  // }));
-  app.use(cors());
+  const app = await NestFactory.create(AppModule);
+
+  const corsOptions: CorsOptions = {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  };
+
+  app.enableCors(corsOptions);
   await app.listen(process.env.BACK_PORT);
 
   app.enableShutdownHooks();   // Gracefully shutdown the server
