@@ -50,23 +50,37 @@ const Game: React.FC = () => {
 	//0 = default
 	//1 = speed mode
 
+	let player_id = 1;
+
 	document.addEventListener("keydown", (e) =>
 	{
 		if (e.key == "w")
 		{
-			p1_up = 1;
+			if (player_id == 1)
+				p1_up = 1;
+			else if (player_id == 2)
+				p2_up = 1;
 		}
 		if (e.key == "s")
 		{
-			p1_down = 1;
+			if (player_id == 1)
+				p1_down = 1;
+			else if (player_id == 2)
+				p2_down = 1;
 		}
 		if (e.key == "ArrowUp" && playmode == 0)
 		{
-			p2_up = 1;
+			if (player_id == 1)
+				p2_up = 1;
+			if (player_id == 2)
+				p1_up = 1;
 		}
 		if (e.key == "ArrowDown" && playmode == 0)
 		{
-			p2_down = 1;
+			if (player_id == 1)
+				p2_down = 1;
+			if (player_id == 2)
+				p1_down = 1;
 		}
 	});
 
@@ -74,19 +88,31 @@ const Game: React.FC = () => {
 	{
 		if (e.key == "w")
 		{
-			p1_up = 0;
+			if (player_id == 1)
+				p1_up = 0;
+			else if (player_id == 2)
+				p2_up = 0;
 		}
 		if (e.key == "s")
 		{
-			p1_down = 0;
+			if (player_id == 1)
+				p1_down = 0;
+			else if (player_id == 2)
+				p2_down = 0;
 		}
 		if (e.key == "ArrowUp" && playmode == 0)
 		{
-			p2_up = 0;
+			if (player_id == 1)
+				p2_up = 0;
+			if (player_id == 2)
+				p1_up = 0;
 		}
 		if (e.key == "ArrowDown" && playmode == 0)
 		{
-			p2_down = 0;
+			if (player_id == 1)
+				p2_down = 0;
+			if (player_id == 2)
+				p1_down = 0;
 		}
 	});
 
