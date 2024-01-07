@@ -39,12 +39,11 @@ const Game: React.FC = () => {
 	let AI_react = 0;
 
 	let playmode = 0;
-
-	let ball_speed_mod = 1;
-
 	//0 = player 2 manual
 	//1 = player 2 AI
 	//2 = online mode
+
+	let ball_speed_mod = 1;
 
 	let gamemode = 0;
 	//0 = default
