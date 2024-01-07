@@ -21,9 +21,6 @@ import { join } from 'path';
     MessageModule,
     GameModule,
     TalkModule,
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', '..', '..', 'dist', 'client'),
-    })
   ],
   controllers: [],
   providers: [],

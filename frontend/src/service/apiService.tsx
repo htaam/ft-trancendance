@@ -21,4 +21,30 @@ export const fetchUsers = async () => {
     throw error;
   }
 };
-  
+
+export const verify2faStatus = async(hash: any) => 
+{
+  try {
+      const info = await axios.post(
+          'localhost:4000/auth/2fa/check-on',
+          {data: hash}
+      )
+      return info;
+  } catch(e)
+  {
+      return undefined;
+  }
+}
+
+export type Form2fa = {
+	Code2fa : string;
+};
+
+export const login2fa = async (form: Form2fa) => {
+	try {
+		const data = await axios.post('localhost:4000/auth/2fa/login', form);
+		return data;
+	} catch (e) {
+		return undefined;
+	}
+}

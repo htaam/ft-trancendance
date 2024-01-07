@@ -88,6 +88,7 @@ export class AuthController {
         userInformation['login'],
       );
       const hash = await bcrypt.hash(user.id, 10);
+      console.log("estamos chegando aqui");
       await this.authService.redirectUserAuth(response, hash);
     } catch (e) {
       const linkImg = await this.authService.downloadImage(

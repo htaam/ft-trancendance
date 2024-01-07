@@ -133,7 +133,7 @@ export class AuthService {
   public getCookieWithJwtToken(user: User) {
     const payload: TokenPayload = { user };
     const token = this.jwtService.sign(payload);
-    return `Authentication=${token}; SameSite=none; Domain: 51.254.37.204; HttpOnly; Path=/; Secure; Max-Age=3600`;
+    return `Authentication=${token}; SameSite=none; Domain: localhost; HttpOnly; Path=/; Secure; Max-Age=3600`;
   }
 
   public getCookieForLogout() {
@@ -142,12 +142,14 @@ export class AuthService {
 
   //redirect user to authenticate using 2fa
   async redirectUserAuth(@Res() response: Response, hash: string) {
+    console.log("hash : " + hash)
     const hash64 = Buffer.from(hash, 'binary').toString('base64');
-    response.redirect(301, process.env.SITE_URL + `:4000/auth/2fa/${hash64}`);
+    console.log("hash64 : " + hash64)
+    response.redirect(301, process.env.SITE_URL + `:5173/Auth/2fa/${hash64}`);
   }
 
   async downloadImage(url: string) {
-    const imgLink: string = `/images/user-image/${uuidv4()}.png` as string;
+    const imgLink: string = `/images/userimage/${uuidv4()}.png` as string;
     const writer = fs.createWriteStream(process.cwd() + imgLink);
 
     const response = await this.httpService.axiosRef({
