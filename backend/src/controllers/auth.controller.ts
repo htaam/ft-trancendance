@@ -18,6 +18,7 @@ import RequestWithUser from '../interfaces/request-with-user.i';
 import { Response } from 'express';
 import JwtAuthGuard from '../auth/jwtauth/jwt-auth.guard';
 import UserRegisterDto from 'src/dtos/user-register.dto';
+import CodeDto from 'src/dtos/code.dto';
 import { Auth42Service } from '../auth/42auth/42auth.service';
 import { UserService } from 'src/services/user.service';
 import * as bcrypt from 'bcrypt';
@@ -76,20 +77,24 @@ export class AuthController {
     return response.send(request.user);
   }
 
-  @Get('callback')
-  async handleToken(@Req() request: Request, @Res() response: Response) {
-    const code: string = request['query'].code as string;
-    const token = await this.auth42Service.accessToken(code);
+  @Post('callback')
+  async handleToken(@Req() request: Request, @Res() response: Response, @Body() body : CodeDto) {
+    const ncode: string = body.code;
+    
+    const token = await this.auth42Service.accessToken(ncode);
     const userInformation = await this.auth42Service.getUserInformation(
       token['access_token'],
     );
+    if (!token || !userInformation)
+      return response.status(400).json({message: 'Invalid user!' });
     try {
       const user = await this.userService.findByUsername(
         userInformation['login'],
       );
       const hash = await bcrypt.hash(user.id, 10);
       console.log("estamos chegando aqui");
-      await this.authService.redirectUserAuth(response, hash);
+      return response.status(200).json({ data: user.id, message: 'Sucesso' });
+      //await this.authService.redirectUserAuth(response, hash);
     } catch (e) {
       const linkImg = await this.authService.downloadImage(
         userInformation['image']['link'] as string,
@@ -130,8 +135,10 @@ export class AuthController {
       );
       const hash = await bcrypt.hash(user.id, 10);
       await this.userService.updateImage(user.id, linkImg as string);
-      await this.authService.redirectUserAuth(response, hash);
+      return response.status(200).json({ data: user.id, message: 'Sucesso' });
+      //await this.authService.redirectUserAuth(response, hash);
     }
+    
   }
 
   @Post('2fa/turn-on')

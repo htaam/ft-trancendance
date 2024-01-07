@@ -1,12 +1,12 @@
 import axios from 'axios'
 
-const BACK_PORT = process.env.BACK_PORT;
+const BACK_PORT = 4000;
 
 export const fetchMessage = async () => {
   try {
-    const response = await axios.get('${BACK_PORT}/messages');
+    const response = await axios.get(`${BACK_PORT}/messages`);
     return response.data;
-  } catch (error) {
+  } catch (error) { 
     console.error('Error fetching messages', error);
     throw error;
    }

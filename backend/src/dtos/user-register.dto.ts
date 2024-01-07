@@ -4,6 +4,7 @@ import User from 'src/entitys/user.entity';
 import { Column } from 'typeorm';
 
 //the dtos objects are used just to map the received information in the requests.
+
 class UserRegisterDto {
   @IsString()
   @IsNotEmpty()

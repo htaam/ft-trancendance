@@ -3,12 +3,10 @@ import React, {useState, useEffect} from 'react'
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useRouter, useParams} from "next/navigation";
 import { verify2faStatus, Form2fa, login2fa } from '../../../service/apiService';
+import Home from '../../Home/Home';
+import TwoAuth from '../TwoAuth';
 
-
-interface TowFaProps {
-}
-
-const TowFa: React.FC<TowFaProps> = ({}) => {
+const TwoFa = ({}) => {
     const Code2fa:any = useParams()["2fa"];
     const { register, handleSubmit, formState: { errors } } = useForm<Form2fa>();
     const { push } = useRouter();
@@ -39,10 +37,14 @@ const TowFa: React.FC<TowFaProps> = ({}) => {
         })
     }
     return (
-        <div>
-            Cu de Boi
-        </div>
-    )
+        <>
+          {!redirect ? (
+            <Home />
+          ) : (
+            <TwoAuth />
+          )}
+        </>
+      );
 }
 
-export default TowFa;
+export default TwoFa;

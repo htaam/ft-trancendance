@@ -10,6 +10,7 @@ import TwoAuth from "./pages/Auth/TwoAuth.tsx";
 import Registration from "./components/Registration/Registration";
 import { RecoilRoot } from "recoil";
 import Talk from "./pages/Talk/Talk";
+import TwoFa from "./pages/Auth/2fa/page.tsx"
 
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/auth/callback" element={<Callback />} />
             <Route path="/TwoAuth" element={<TwoAuth />} />
             <Route path="/Talk" element={<Talk />} />
+            <Route path="/auth/2fa" element={<TwoFa />}/>
           </Routes>
           {/*<AQUI VAI FICAR O CONTEXTO>*/}
         </Router>
