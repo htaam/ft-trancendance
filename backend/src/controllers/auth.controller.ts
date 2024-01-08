@@ -92,9 +92,7 @@ export class AuthController {
         userInformation['login'],
       );
       const hash = await bcrypt.hash(user.id, 10);
-      console.log("estamos chegando aqui");
-      return response.status(200).json({ data: user.id, message: 'Sucesso' });
-      //await this.authService.redirectUserAuth(response, hash);
+      return response.status(200).json({ data: hash });
     } catch (e) {
       const linkImg = await this.authService.downloadImage(
         userInformation['image']['link'] as string,
@@ -135,10 +133,8 @@ export class AuthController {
       );
       const hash = await bcrypt.hash(user.id, 10);
       await this.userService.updateImage(user.id, linkImg as string);
-      return response.status(200).json({ data: user.id, message: 'Sucesso' });
-      //await this.authService.redirectUserAuth(response, hash);
-    }
-    
+      return response.status(200).json({ data: hash });
+    }   
   }
 
   @Post('2fa/turn-on')
@@ -225,19 +221,20 @@ export class AuthController {
     @Res() response: Response,
     @Body() body,
   ) {
+    console.log("entramos aqui no 2fa");
     if (!body.hash)
       throw new HttpException('No hashed param', HttpStatus.UNAUTHORIZED);
-    const code = Buffer.from(body.hash, 'base64').toString('binary');
-    const userid = await this.userService.FindUserOnDB(code);
+    //const code = Buffer.from(body.hash, 'base64').toString('binary');
+    const userid = await this.userService.FindUserOnDB(body.hash);
     const user = await this.userService.findById(userid);
-    if (user.is2FOn) return response.send(true);
+    if (user.is2FOn) response.status(200).json({ data: true });
     const cookie = this.authService.getCookieWithJwtToken(user);
     response.setHeader('Set-Cookie', cookie);
     response.cookie('Authentication', this.authService.getJwtToken(user), {
       httpOnly: true,
       domain: process.env.SITE_NAME,
     });
-    return response.send(false);
+    return response.status(200).json({ data: false });
   }
   @Get('2fa/disable')
   @HttpCode(200)

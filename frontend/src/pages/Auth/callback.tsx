@@ -20,7 +20,21 @@ const callback = () => {
       })
         .then(response => response.json())
         .then(data => {
-          navigate(`/auth/2fa?2fa=${data.data}`);
+          const requestBody2fa = new URLSearchParams();
+          requestBody2fa.append("hash", data.data as string);
+          fetch(`http://localhost:4000/auth/2fa/check-on`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: requestBody2fa.toString(),
+      }).then(res => res.json())
+      .then((data) => {
+            if (data.data == false)
+                navigate('/home/')
+            else
+                navigate('/TwoAuth');
+        })
         })
         .catch(error => console.error('Error fetching callback:', error));
     }
