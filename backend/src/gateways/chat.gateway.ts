@@ -15,7 +15,7 @@ import { UserService } from 'src/services/user.service';
 
 let backendMembers = [''];
 
-@WebSocketGateway({ cors: { origin: 'http://localhost:5173' } })
+@WebSocketGateway({ cors: { origin: 'http://localhost:5173', credentials: true } }) // Cors errors if 'credentials' are not used
 export class ChatGateway {
   constructor(
     private userService: UserService,

@@ -112,17 +112,19 @@ let AuthService = class AuthService {
     getCookieWithJwtToken(user) {
         const payload = { user };
         const token = this.jwtService.sign(payload);
-        return `Authentication=${token}; SameSite=none; Domain: 51.254.37.204; HttpOnly; Path=/; Secure; Max-Age=3600`;
+        return `Authentication=${token}; SameSite=none; Domain: localhost; HttpOnly; Path=/; Secure; Max-Age=3600`;
     }
     getCookieForLogout() {
         return 'Authentication=; HttpOnly; Path=/; Max-Age:0';
     }
     async redirectUserAuth(response, hash) {
+        console.log("hash : " + hash);
         const hash64 = Buffer.from(hash, 'binary').toString('base64');
-        response.redirect(301, process.env.SITE_URL + `:4000/auth/2fa/${hash64}`);
+        console.log("hash64 : " + hash64);
+        response.redirect(301, process.env.SITE_URL + `:5173/Auth/2fa/${hash64}`);
     }
     async downloadImage(url) {
-        const imgLink = `/images/user-image/${(0, uuid_1.v4)()}.png`;
+        const imgLink = `/images/userimage/${(0, uuid_1.v4)()}.png`;
         const writer = fs.createWriteStream(process.cwd() + imgLink);
         const response = await this.httpService.axiosRef({
             url: url,

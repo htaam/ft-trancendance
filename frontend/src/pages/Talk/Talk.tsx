@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Socket, io } from "socket.io-client"; // 2.
+import { Socket, io } from "socket.io-client";
 import {
 	ClientToServerEvents, 
 	Message,
@@ -10,11 +10,10 @@ import { TalkLayout } from "./Layout/TalkLayout"
 import { Messages } from "./Messages/Messages";
 import { MessageForm } from "./Messages/MessageForm";
 import { Header } from "../Talk/Header";
-import Sidebar from "../../components/Sidebar/Sidebar";
 
-// const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:4000", {
-//   withCredentials: true, // If needed
-// });
+const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://localhost:4000", {
+  withCredentials: true, // If needed
+});
 
 export const Talk = () => {
 	// Store the clients current state of the connection
@@ -28,7 +27,7 @@ export const Talk = () => {
 		We will be able to log in a new user per each browser tab */
 	useEffect(() => {
 		const currentUser = JSON.parse(sessionStorage.getItem('user') ?? '{}'); // Grab current "Logged in" user
-		if (currentUser.id) { // If exists, we know there is a "Logged in" user
+		if (currentUser) { // If exists, we know there is a "Logged in" user
 			setUser(currentUser); // We set the current "Logged in" user into state
 		}
 
@@ -47,6 +46,7 @@ export const Talk = () => {
 			setMessages((messages) => [e, ...messages]); //Recieve messages
 		});
 
+		logUser();
 		// Cleanup procedure to remove event listeners
 		return () => {
 			socket.off('connect');
@@ -55,6 +55,17 @@ export const Talk = () => {
 		};
 	}, []);
 
+	// test
+	const logUser = () => {
+		const newUser: User = {
+			id: '0',
+			userName: 'mmota',
+		};
+		sessionStorage.setItem('user', JSON.stringify(newUser));
+		setUser(newUser);
+	};
+
+	
 	const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 	 
@@ -74,9 +85,8 @@ export const Talk = () => {
 
 	return (
 		<>
-			{user && user.id ? (
-				<div className="container-row">
-					<Sidebar />
+			{/* {user && user.id ? ( */}
+				{user ? (
 					<div className="container-column">
 						<TalkLayout>
 							<Header user={user} isConnected={isConnected}></Header>
@@ -84,7 +94,6 @@ export const Talk = () => {
 							<MessageForm sendMessage={sendMessage}></MessageForm>
 						</TalkLayout>
 					</div>
-				</div>
 			) : ( // If user is "Not Logged in" render Log 
 				<p>Loading...</p> //don't know how to take the "if" statement,,,
 			)}

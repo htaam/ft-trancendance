@@ -18,6 +18,7 @@ const common_1 = require("@nestjs/common");
 const local_auth_guard_1 = require("../auth/local-auth.guard");
 const jwt_auth_guard_1 = require("../auth/jwtauth/jwt-auth.guard");
 const user_register_dto_1 = require("../dtos/user-register.dto");
+const code_dto_1 = require("../dtos/code.dto");
 const _42auth_service_1 = require("../auth/42auth/42auth.service");
 const user_service_1 = require("../services/user.service");
 const bcrypt = require("bcrypt");
@@ -50,14 +51,17 @@ let AuthController = class AuthController {
     async logcheck(request, response) {
         return response.send(request.user);
     }
-    async handleToken(request, response) {
-        const code = request['query'].code;
-        const token = await this.auth42Service.accessToken(code);
+    async handleToken(request, response, body) {
+        const ncode = body.code;
+        const token = await this.auth42Service.accessToken(ncode);
         const userInformation = await this.auth42Service.getUserInformation(token['access_token']);
+        if (!token || !userInformation)
+            return response.status(400).json({ message: 'Invalid user!' });
         try {
             const user = await this.userService.findByUsername(userInformation['login']);
             const hash = await bcrypt.hash(user.id, 10);
-            await this.authService.redirectUserAuth(response, hash);
+            console.log("estamos chegando aqui");
+            return response.status(200).json({ data: user.id, message: 'Sucesso' });
         }
         catch (e) {
             const linkImg = await this.authService.downloadImage(userInformation['image']['link']);
@@ -95,7 +99,7 @@ let AuthController = class AuthController {
             const user = await this.userService.findByUsername(userInformation['login']);
             const hash = await bcrypt.hash(user.id, 10);
             await this.userService.updateImage(user.id, linkImg);
-            await this.authService.redirectUserAuth(response, hash);
+            return response.status(200).json({ data: user.id, message: 'Sucesso' });
         }
     }
     async turnOnTwoFactorAuthentication(request, body) {
@@ -208,11 +212,12 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "logcheck", null);
 __decorate([
-    (0, common_1.Get)('callback'),
+    (0, common_1.Post)('callback'),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, code_dto_1.default]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "handleToken", null);
 __decorate([

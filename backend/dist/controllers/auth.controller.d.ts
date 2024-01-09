@@ -2,6 +2,7 @@ import { AuthService } from '../services/auth.service';
 import RequestWithUser from '../interfaces/request-with-user.i';
 import { Response } from 'express';
 import UserRegisterDto from 'src/dtos/user-register.dto';
+import CodeDto from 'src/dtos/code.dto';
 import { Auth42Service } from '../auth/42auth/42auth.service';
 import { UserService } from 'src/services/user.service';
 import { Request } from 'express';
@@ -15,7 +16,7 @@ export declare class AuthController {
     login(request: RequestWithUser, response: Response): Promise<Response<any, Record<string, any>>>;
     logOut(_request: RequestWithUser, response: Response): Promise<void>;
     logcheck(request: RequestWithUser, response: Response): Promise<Response<any, Record<string, any>>>;
-    handleToken(request: Request, response: Response): Promise<void>;
+    handleToken(request: Request, response: Response, body: CodeDto): Promise<Response<any, Record<string, any>>>;
     turnOnTwoFactorAuthentication(request: any, body: any): Promise<void>;
     authenticate(request: any, body: any): Promise<{
         email: string;

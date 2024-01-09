@@ -200,7 +200,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ChatGateway.prototype, "getChannelMessages", null);
 exports.ChatGateway = ChatGateway = __decorate([
-    (0, websockets_1.WebSocketGateway)({ cors: { origin: 'http://localhost:5173' } }),
+    (0, websockets_1.WebSocketGateway)({ cors: { origin: 'http://localhost:5173', credentials: true } }),
     __metadata("design:paramtypes", [user_service_1.UserService,
         chat_service_1.ChatService])
 ], ChatGateway);
