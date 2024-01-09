@@ -57,6 +57,7 @@ let AuthController = class AuthController {
         try {
             const user = await this.userService.findByUsername(userInformation['login']);
             const hash = await bcrypt.hash(user.id, 10);
+            console.log("estamos chegando aqui");
             await this.authService.redirectUserAuth(response, hash);
         }
         catch (e) {

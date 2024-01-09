@@ -5,9 +5,9 @@
   color: #fff;
   background-color: #463366;
   border-right: 5px solid aquamarine;
-  padding-top:120px;
-  padding-right: 100px;
-  margin-right: 100px;;
+  /* padding-top:120px; */
+  padding-right: 40px;
+  /* margin-right: 100px; */
   margin-left: 40px;
   height:100vh;
   display: none;
